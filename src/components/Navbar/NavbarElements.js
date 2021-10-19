@@ -32,7 +32,7 @@ export const NavbarContainer = styled.div`
 export const NavLogo = styled(LinkR)`
     color: #fff;
     justify-self: flex-start;
-    cursosr: pointer;
+    cursor: pointer;
     font-size: 1.5rem;
     display: flex;
     align-items: center;
@@ -51,7 +51,7 @@ export const MobileIcon = styled.div`
         right: 0;
         transform: translate(-100%, 60%);
         font-size: 1.8rem;
-        cursosr: pointer;
+        cursor: pointer;
         color: #fff;
     }
 `;
@@ -79,9 +79,9 @@ export const NavLinks = styled(LinkS)`
     text-decoration: none;
     padding: 0 1rem;
     height: 100%;
-    cursosr: pointer;
+    cursor: pointer;
 
-    &.active {
+    &:active {
         border-bottom: 3px solid #01bf71;
     }
 `;
@@ -104,11 +104,11 @@ export const NavBtnLink = styled(LinkR)`
     font-size: 16px;
     outline: none;
     border: none;
-    cursosr: pointer;
+    cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
 
-    &.hover {
+    &:hover {
         transition: all 0.2 ease-in-out;
         background: #fff;
         color: #01606;
