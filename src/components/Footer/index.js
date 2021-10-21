@@ -28,13 +28,13 @@ const Footer = () => {
                         <SocialLogo to='/'>Elektroniniai Mainai</SocialLogo>
                         <WebsiteRights>Elektroniniai Mainai ® {new Date().getFullYear()} All rights reserved.</WebsiteRights>
                         <SocialIcons>
-                            <SocialIconLink href="//www.facebook.com" target="_blank" aria-labels="Facebook">
+                            <SocialIconLink href="//www.facebook.com" target="_blank" aria-label="Facebook">
                                 <FaFacebook />
                             </SocialIconLink>
-                            <SocialIconLink href="//www.youtube.com" target="_blank" aria-labels="Youtube">
+                            <SocialIconLink href="//www.youtube.com" target="_blank" aria-label="Youtube">
                                 <FaYoutube />
                             </SocialIconLink>
-                            <SocialIconLink href="//www.linkedin.com" target="_blank" aria-labels="LinkedIn">
+                            <SocialIconLink href="//www.linkedin.com" target="_blank" aria-label="LinkedIn">
                                 <FaLinkedin />
                             </SocialIconLink>
                         </SocialIcons>
