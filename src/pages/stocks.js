@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
+import { Stocks } from '../components/Stocks'
 import Navbar from '../components/Navbar-Main';
-import { Homepage } from '../components/Main';
 
-const Main = () => {
+const StocksPage = () => {
+
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => {
@@ -12,9 +13,9 @@ const Main = () => {
     return (
         <>
         <Navbar toggle={toggle} />
-        <Homepage />
+        <Stocks />
         </>
-    );
-};
+    )
+}
 
-export default Main
+export default StocksPage
