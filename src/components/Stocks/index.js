@@ -1,47 +1,47 @@
-import React, {useState, useEffect} from 'react';
-import millify from 'millify';
+import React, {useEffect, useState} from 'react';
+import Loader from '../Loader';
 import { Row, Col} from 'antd';
-import { CryptoContainer, CryptoCard, CryptoLink, Image, SearchCrypto, CryptoInput} from './StocksElements'
-
-import { useGetCryptosQuery } from '../../services/cryptoAPI';
+import { StockContainer, StockCard, StockLink, SearchStock, StockInput} from './StocksElements';
+import millify from 'millify';
+import { useGetMostActivesQuery } from '../../services/financeAPI';
 
 export const Stocks = ({simplified}) => {
     const amountToSlice = simplified ? 10 : 50;
-    const {data: cryptosList, isFetching} = useGetCryptosQuery();
-    const [cryptos, setCryptos] = useState([]);
+    const {data: stocksList, isFetching} = useGetMostActivesQuery();
+    const [stocks, setStocks] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-
+    
     useEffect(() => {
-        const filteredData = cryptosList?.data?.coins.filter((coin) => coin.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        const filteredData = stocksList?.quotes.filter((stock) => (typeof stock.displayName !== "undefined") && stock.displayName.toString().toLowerCase().includes(searchTerm.toLowerCase()))
         
-        setCryptos(filteredData)
-    }, [cryptosList, searchTerm])
+        setStocks(filteredData)
+    }, [stocksList, searchTerm])
 
-    if(isFetching) return 'Loading...';
+    if(isFetching) return <Loader />;
 
     return (
         <>
         {!simplified && (
-        <SearchCrypto>
-            <CryptoInput placeholder="ieškoti" onChange={(e) => setSearchTerm(e.target.value)}/>
-        </SearchCrypto>
+        <SearchStock>
+            <StockInput placeholder="ieškoti" onChange={(e) => setSearchTerm(e.target.value)}/>
+        </SearchStock>
         )}
-        <CryptoContainer>
+        <StockContainer>
             <Row gutter={[32, 32]}>
-                {cryptos?.slice(0, amountToSlice).map((currency) => (
+                {stocks?.slice(0, amountToSlice).map((stock) => (
 
-                        <Col xs={24} sm={12} lg={6} key={currency.id}>
-                            <CryptoLink to={`/stock/${currency.id}`}>
-                                <CryptoCard title={`${currency.rank}. ${currency.name}`} extra={<Image src={currency.iconUrl} />} hoverable>
-                                    <p>Price: {millify(currency.price)}</p>
-                                    <p>Market Cap: {millify(currency.marketCap)}</p>
-                                    <p>Daily Change: {millify(currency.change)}%</p>
-                                </CryptoCard>
-                            </CryptoLink>
+                        <Col xs={24} sm={12} lg={6} key={stock.symbol}>
+                            <StockLink to={`/stock/${stock.symbol}`}>
+                                <StockCard title={`${stock.displayName}`} hoverable>
+                                    <p>Price: {millify(stock.regularMarketPrice)}</p>
+                                    <p>Market Cap: {millify(stock.marketCap)}</p>
+                                    <p>Daily Change: {millify(stock.regularMarketChangePercent)}%</p>
+                                </StockCard>
+                            </StockLink>
                         </Col>               
                 ))}
             </Row>
-        </CryptoContainer>
+        </StockContainer>
         </>
     )
 }

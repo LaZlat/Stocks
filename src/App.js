@@ -6,9 +6,12 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import SignInPage from './pages/singin';
 import SignUpPage from './pages/singup';
 import MainPage from './pages/main';
-import StocksPage from './pages/stocks';
+import CryptosPage from './pages/cryptos';
+import CryptoDetailsPage from './pages/crypto';
 import {Provider} from 'react-redux';
 import store from './app/store';
+import StocksPage from './pages/stocks';
+
 
 function App() {
   return (
@@ -19,6 +22,8 @@ function App() {
         <Route path ="/signin" component={SignInPage} exact />
         <Route path ="/signup" component={SignUpPage} exact />
         <Route path ="/main" component={MainPage} exact />
+        <Route path ="/cryptos" component={CryptosPage} exact />
+        <Route path ="/crypto/:id" component={CryptoDetailsPage} exact />
         <Route path ="/stocks" component={StocksPage} exact />
       </Switch>
       <Footer />

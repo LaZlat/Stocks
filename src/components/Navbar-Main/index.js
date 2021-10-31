@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks2, NavBtn, NavBtnLink} from '../Navbar/NavbarElements';
 import {FaBars} from 'react-icons/fa';
 import { animateScroll as scroll } from 'react-scroll';
+import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOutlined } from '@ant-design/icons';
+
 
 const NavbarMain = ({toggle}) => {
 
@@ -34,13 +36,13 @@ const NavbarMain = ({toggle}) => {
                     </MobileIcon>
                     <NavMenu>
                         <NavItem>
-                            <NavLinks2 to='/main'>Main</NavLinks2>
+                            <NavLinks2 to='/main'><HomeOutlined/> Main</NavLinks2>
                         </NavItem>
                         <NavItem>
-                            <NavLinks2 to='/stocks'>Stocks</NavLinks2>
+                            <NavLinks2 to='/cryptos'><MoneyCollectOutlined/>Cryptos</NavLinks2>
                         </NavItem>
                         <NavItem>
-                            <NavLinks2 to='services'>Services</NavLinks2>
+                            <NavLinks2 to='/stocks'><BulbOutlined />Stocks</NavLinks2>
                         </NavItem>
                     </NavMenu>
                     <NavBtn>

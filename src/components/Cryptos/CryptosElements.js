@@ -3,14 +3,14 @@ import {Link} from 'react-router-dom';
 import { Card, Input } from 'antd';
 
 
-export const StockContainer = styled.div`
+export const CryptoContainer = styled.div`
     min-height: 65vh !important;
 `;
 
-export const StockLink = styled(Link)`;
+export const CryptoLink = styled(Link)`;
 `;
 
-export const  StockCard = styled(Card)`
+export const CryptoCard = styled(Card)`
     min-width: 250px;
 `;
 
@@ -18,10 +18,10 @@ export const Image = styled.img`
     width: 35px;
 `;
 
-export const SearchStock = styled.div`
+export const SearchCrypto = styled.div`
     min-height: 65vh !important;
 `;
 
-export const StockInput = styled(Input)`
+export const CryptoInput = styled(Input)`
     min-width: 250px;
 `;

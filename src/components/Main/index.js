@@ -3,14 +3,16 @@ import millify from 'millify';
 import { Typography, Row, Col, Statistic } from 'antd';
 import {Container, Title, StocksWrap, StockLink} from '../Main/MainElements';
 import {useGetCryptosQuery} from '../../services/cryptoAPI';
+import {Cryptos} from '../Cryptos';
 import {Stocks} from '../Stocks';
+import Loader from '../Loader';
 
 
 export const Homepage = () => {
     const {data, isFetching} = useGetCryptosQuery();
     const globalStats = data?.data?.stats;
 
-    if(isFetching) return 'Loading...';
+    if(isFetching) return <Loader />;
 
     return (
         <>
@@ -23,6 +25,11 @@ export const Homepage = () => {
                 <Col span={12}><Statistic title="Total 24h Volume" value="5" /></Col>
                 <Col span={12}><Statistic title="Total Markets" value="5" /></Col>
             </Row>
+            <StocksWrap>
+                <Title>Top 10 cryptos</Title>
+                <StockLink to="/cryptos">Daugiau...</StockLink>
+            </StocksWrap>
+            <Cryptos simplified={true}/>
             <StocksWrap>
                 <Title>Top 10 stocks</Title>
                 <StockLink to="/stocks">Daugiau...</StockLink>
