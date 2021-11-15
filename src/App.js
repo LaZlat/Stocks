@@ -11,6 +11,7 @@ import CryptoDetailsPage from './pages/crypto';
 import {Provider} from 'react-redux';
 import store from './app/store';
 import StocksPage from './pages/stocks';
+import StockDetailsPage from './pages/stock';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path ="/cryptos" component={CryptosPage} exact />
         <Route path ="/crypto/:id" component={CryptoDetailsPage} exact />
         <Route path ="/stocks" component={StocksPage} exact />
+        <Route path ="/stock/:symbol" component={StockDetailsPage} exact />
       </Switch>
       <Footer />
       </Provider>

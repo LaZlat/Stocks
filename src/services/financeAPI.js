@@ -18,10 +18,13 @@ export const financeApi = createApi({
         }),
         getStock: builder.query({
             query: (symbol) => createRequest(`/qu/quote?symbol=${symbol}`),
-        })
+        }),
+        getHistory: builder.query({
+            query: ({symbol, interval}) => createRequest(`/hi/history?symbol=${symbol}&interval=${interval}`),
+        }),
     })
 })
 
 export const {
-    useGetMostActivesQuery, useGetStockQuery
+    useGetMostActivesQuery, useGetStockQuery, useGetHistoryQuery
 } = financeApi;

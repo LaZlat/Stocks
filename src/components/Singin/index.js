@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Container, FormContent, FormWrap, Icon, Form, FormH1, FormLabel, FormInput, FormButton, Text } from './SigninElements'
 import Axios from 'axios'
 
@@ -6,17 +6,19 @@ export const Signin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [h1Text, setH1Text] = useState("Sign In HAHAHA");
+    const [loginStatus, setLoginStatus] = useState("");
+
+    Axios.defaults.withCredentials = true;
 
     const signin = () => {
         Axios.post('http://localhost:3001/signin', {
             email: email,
             password: password
         }).then((response) => {
-            console.log(response)
-            if(response.data.id  !== 0) {
+            if(response.data.re === 1) {
                 window.location = "/main";
             } else {
-                setH1Text("Worng credentials");
+                setH1Text("WRONG");
             }
         })
     }

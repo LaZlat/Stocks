@@ -3,62 +3,99 @@ import HTMLReactParser from 'html-react-parser';
 import { useParams } from 'react-router-dom'
 import millify from 'millify';
 import {Col, Row, Typography, Select} from 'antd';
-import {useGetStockQuery} from '../../services/financeAPI';
+import {useGetHistoryQuery, useGetStockQuery} from '../../services/financeAPI';
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
-import LineChart from '../LineChart';
+import LineChartStocks from '../LineChartStocks';
 import Loader from '../Loader';
+import { FormContent, FormButton, FormH1, FormInput, FormLabel, Form} from './StockDetailsElements';
+import Axios from 'axios';
 
-export const CryptoDetails = () => {
+export const StockDetails = () => {
     const { symbol } = useParams();
-    //const [timePeriod, setTimePeriod] = useState('7d');
+    const [interval, setInterval] = useState('1d');
     const {data, isFetching} = useGetStockQuery(symbol);
-    const stockDetails = data.displayName;
+    const {data: stockHistory} = useGetHistoryQuery({symbol, interval});
+    const [volume, setVolume] = useState('0');
+    const stockDetails = data;
 
-    console.log(stockDetails);
-
+    
     if (isFetching) return <Loader />;
 
-    const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
+    const time = ['5m', '15m', '30m', '1h', '1d', '1wk', '1mo', '3mo'];
 
     const stats = [
-        { title: 'Price to USD', value: `$ ${cryptoDetails.price && millify(cryptoDetails.price)}`, icon: <DollarCircleOutlined /> },
-        { title: 'Rank', value: cryptoDetails.rank, icon: <NumberOutlined /> },
-        { title: '24h Volume', value: `$ ${cryptoDetails.volume && millify(cryptoDetails.volume)}`, icon: <ThunderboltOutlined /> },
-        { title: 'Market Cap', value: `$ ${cryptoDetails.marketCap && millify(cryptoDetails.marketCap)}`, icon: <DollarCircleOutlined /> },
-        { title: 'All-time-high(daily avg.)', value: `$ ${millify(cryptoDetails.allTimeHigh.price)}`, icon: <TrophyOutlined /> },
+        { title: 'Pilnas pavadinimas', value: stockDetails[0].longName, icon: <FundOutlined /> },
+        { title: 'Simbolis', value: stockDetails[0].symbol, icon: <FundOutlined /> },
+        { title: 'Price to USD', value: stockDetails[0].ask, icon: <DollarCircleOutlined /> },
+        { title: 'Per dieną parduodama', value: stockDetails[0].averageDailyVolume10Day, icon: <ThunderboltOutlined /> },
+        { title: 'Birža kurioje prekiaujama', value: stockDetails[0].exchange, icon: <DollarCircleOutlined /> },
+        { title: 'Biržos laiko zona', value: stockDetails[0].exchangeTimezoneName, icon: <TrophyOutlined /> },
     ];
 
     const genericStats = [
-        { title: 'Number Of Markets', value: cryptoDetails.numberOfMarkets, icon: <FundOutlined /> },
-        { title: 'Number Of Exchanges', value: cryptoDetails.numberOfExchanges, icon: <MoneyCollectOutlined /> },
-        { title: 'Aprroved Supply', value: cryptoDetails.approvedSupply ? <CheckOutlined /> : <StopOutlined />, icon: <ExclamationCircleOutlined /> },
-        { title: 'Total Supply', value: `$ ${millify(cryptoDetails.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
-        { title: 'Circulating Supply', value: `$ ${millify(cryptoDetails.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
+       { title: '5 dienų kainos vidurkis', value: stockDetails[0].fiftyDayAverage, icon: <FundOutlined /> },
+        { title: '5 dienų kainos vidurkio pokytis', value: stockDetails[0].fiftyDayAverageChange, icon: <FundOutlined /> },
+        { title: '5 dienų kainos vidurkio pokyčio procentas', value: stockDetails[0].fiftyDayAverageChangePercent, icon: <FundOutlined /> },
+        { title: '52 savaičių auksčiausia kaina', value: stockDetails[0].fiftyTwoWeekHigh, icon: <FundOutlined /> },
+        { title: '52 savaičių auksčiausios kainos pokytis', value: stockDetails[0].fiftyTwoWeekHighChange, icon: <FundOutlined /> },
+        { title: '52 savaičių auksčiausios kainos pokytis procentais', value: stockDetails[0].fiftyTwoWeekHighChangePercent, icon: <FundOutlined /> },
+        { title: '52 savaičių žemiausia kaina', value: stockDetails[0].fiftyTwoWeekLow, icon: <FundOutlined /> },
+        { title: '52 savaičių žemiausios kainos pokytis', value: stockDetails[0].fiftyTwoWeekLowChange, icon: <FundOutlined /> },
+        { title: '52 savaičių auksčiausios kainos pokytis procentais', value: stockDetails[0].fiftyTwoWeekLowChangePercent, icon: <FundOutlined /> },
+        { title: 'Market cap', value: stockDetails[0].marketCap, icon: <FundOutlined /> },
+        { title: 'Rinkos būsena', value: stockDetails[0].marketState, icon: <FundOutlined /> },
+        { title: 'Vertybinių popierių tipas', value: stockDetails[0].quoteType, icon: <FundOutlined /> },
     ];
 
+    const buyStock = () => {
+        Axios.post('http://localhost:3001/buy/buycrypto', {
+            uid: 1,
+            symbol: symbol,
+            price: stockDetails[0].ask,
+            currency: 'USD',
+            volume: volume
+        }).then((response) => {
+            console.log(response)
+        })
+    }
+   
+
     return (
+        
             <Col className="coin-detail-container">
                 <Col className="coin-heading-container">
                     <Typography level={2} className="coin-name">
-                        {cryptoDetails.name} ({cryptoDetails.slug}) Price
+                        {stockDetails[0].symbol}
                     </Typography>
                     <p>
-                        {cryptoDetails.name} live price in US dollars.
+                        {stockDetails[0].name} live price in US dollars.
                         View everything here and there
                     </p>
                 </Col>
-                <Select defaultValue="7d" className="select-timeperiod" placeholder="Select time period" onChange={(value) => setTimePeriod(value)}>
+                <Select defaultValue="1d" className="select-timeperiod" placeholder="Select interval1" onChange={(value) => setInterval(value)}>
                     {time.map((date) => <Select key={date}>{date}</Select>)}
                 </Select>
-                <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name}/>
+                {<LineChartStocks stockHistory={stockHistory} currentPrice={stockDetails[0].ask} stockSymbol={stockDetails[0].symbol}/>}
+                
+                <FormContent>
+                          <Form>
+                              <FormH1>Pirkti</FormH1>
+                              <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormInput type='number' min='1' required onChange={(e) => {
+                                  setVolume(e.target.value)
+                              }}/>
+                              <FormButton type='button' onClick={buyStock}>Pirkti</FormButton>
+                          </Form>
+                </FormContent>
+                
                 <Col className="stats-container">
                     <Col className="coin-value-stats">
                         <Col className="coin-value=stats-heading">
                             <Typography level={3} className="coin-details-heading">
-                                {cryptoDetails.name} Value Statistics
+                                {stockDetails.longName} Value Statistics
                             </Typography>
                             <p>
-                                An Overview of stats and statistics of {cryptoDetails.name}
+                                An Overview of stats and statistics of {stockDetails.longName}
                             </p>
                         </Col>
                         {stats.map(({icon, title, value}) => (
@@ -74,10 +111,10 @@ export const CryptoDetails = () => {
                     <Col className="other-value-stats">
                         <Col className="coin-value=stats-heading">
                             <Typography level={3} className="coin-details-heading">
-                                {cryptoDetails.name} Value Statistics
+                                {stockDetails.longName} Value Statistics
                             </Typography>
                             <p>
-                                An Overview of stats and statistics of {cryptoDetails.name}
+                                An Overview of stats and statistics of {stockDetails.longName}
                             </p>
                         </Col>
                         {genericStats.map(({icon, title, value}) => (
@@ -89,29 +126,6 @@ export const CryptoDetails = () => {
                                 <Typography className="stats">{value}</Typography>
                             </Col>
                         ))}
-                    </Col>
-                </Col>
-                <Col className="coin-sec-link">
-                    <Row className="coin-desc">
-                            <Typography level={3} className="coin-details-heading">
-                                What is {cryptoDetails.name}?
-                                {HTMLReactParser(cryptoDetails.description)}
-                            </Typography>
-                    </Row>
-                    <Col className="coin-links">
-                            <Typography level={3} className="coin-details-heading">
-                                {cryptoDetails.name} links
-                            </Typography>
-                            {cryptoDetails.links.map((link) => (
-                                <Row className="coin-link" key={link.name}>
-                                    <Typography level={5} className="link-name">
-                                        {link.type}
-                                    </Typography>
-                                    <a href={link.url} targer="_blank" rel="noreferrer">
-                                        {link.name}
-                                    </a>
-                                </Row>
-                            ))}
                     </Col>
                 </Col>
             </Col>

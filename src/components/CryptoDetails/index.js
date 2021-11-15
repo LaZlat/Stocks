@@ -7,6 +7,8 @@ import {useGetCryptoDetailsQuery, useGetCryptoHistoryQuery} from '../../services
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import LineChart from '../LineChart';
 import Loader from '../Loader';
+import Axios from 'axios';
+import { FormContent, FormButton, FormH1, FormInput, FormLabel, Form} from './CryptoDetailsElements';
 
 export const CryptoDetails = () => {
     const { id } = useParams();
@@ -14,10 +16,12 @@ export const CryptoDetails = () => {
     const {data, isFetching} = useGetCryptoDetailsQuery(id);
     const {data: coinHistory} = useGetCryptoHistoryQuery({id, timePeriod});
     const cryptoDetails = data?.data?.coin;
+    const [volume, setVolume] = useState('0');
+
 
     if (isFetching) return <Loader />;
 
-    const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
+    const time = ['3h', '24h', '7d', '30d', '1m', '3m', '3y', '5y'];
 
     const stats = [
         { title: 'Price to USD', value: `$ ${cryptoDetails.price && millify(cryptoDetails.price)}`, icon: <DollarCircleOutlined /> },
@@ -34,6 +38,18 @@ export const CryptoDetails = () => {
         { title: 'Total Supply', value: `$ ${millify(cryptoDetails.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
         { title: 'Circulating Supply', value: `$ ${millify(cryptoDetails.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
     ];
+    
+    const buyCrypto = () => {
+        Axios.post('http://localhost:3001/buy/buycrypto', {
+            uid: 1,
+            cid: id,
+            price: cryptoDetails.price,
+            currency: 'USD',
+            volume: volume
+        }).then((response) => {
+            console.log(response)
+        })
+    }
 
     return (
             <Col className="coin-detail-container">
@@ -50,6 +66,18 @@ export const CryptoDetails = () => {
                     {time.map((date) => <Select key={date}>{date}</Select>)}
                 </Select>
                 <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name}/>
+
+                <FormContent>
+                          <Form>
+                              <FormH1>Pirkti</FormH1>
+                              <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormInput type='number' min='1' required onChange={(e) => {
+                                  setVolume(e.target.value)
+                              }}/>
+                              <FormButton type='button' onClick={buyCrypto}>Pirkti</FormButton>
+                          </Form>
+                </FormContent>
+
                 <Col className="stats-container">
                     <Col className="coin-value-stats">
                         <Col className="coin-value=stats-heading">
