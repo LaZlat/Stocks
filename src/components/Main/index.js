@@ -6,17 +6,10 @@ import {useGetCryptosQuery} from '../../services/cryptoAPI';
 import {Cryptos} from '../Cryptos';
 import {Stocks} from '../Stocks';
 import Loader from '../Loader';
-import Axios from 'axios'
 
 export const Homepage = () => {
     const {data, isFetching} = useGetCryptosQuery();
     const globalStats = data?.data?.stats;
-
-    useEffect(() => {
-        Axios.get("http://localhost:3001/signin").then((response) => {
-            console.log(response);
-        })
-    }, [])
 
     if(isFetching) return <Loader />;
 

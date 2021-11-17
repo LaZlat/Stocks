@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react'
+import { useHistory } from "react-router-dom";
 import { Container, FormContent, FormWrap, Icon, Form, FormH1, FormLabel, FormInput, FormButton, Text } from './SigninElements'
 import Axios from 'axios'
+import jwt from "jsonwebtoken";
+
 
 export const Signin = () => {
     const [email, setEmail] = useState("");
@@ -8,15 +11,18 @@ export const Signin = () => {
     const [h1Text, setH1Text] = useState("Sign In HAHAHA");
     const [loginStatus, setLoginStatus] = useState("");
 
-    Axios.defaults.withCredentials = true;
+    //Axios.defaults.withCredentials = true;
 
+    const history = useHistory();
     const signin = () => {
         Axios.post('http://localhost:3001/signin', {
             email: email,
             password: password
-        }).then((response) => {
-            if(response.data.re === 1) {
-                window.location = "/main";
+        }).then((res) => {
+            if (res.status === 200){
+                localStorage.setItem("token", res.data.token)
+                localStorage.setItem("email", res.data.email)
+                history.push(`/main`);
             } else {
                 setH1Text("WRONG");
             }

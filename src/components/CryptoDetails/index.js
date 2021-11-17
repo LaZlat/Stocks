@@ -45,7 +45,8 @@ export const CryptoDetails = () => {
             cid: id,
             price: cryptoDetails.price,
             currency: 'USD',
-            volume: volume
+            volume: volume,
+            name: cryptoDetails.name
         }).then((response) => {
             console.log(response)
         })
