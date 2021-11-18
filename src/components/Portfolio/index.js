@@ -11,9 +11,9 @@ export const Portfolio = () => {
 
     const [cashData, setCashData] = useState(null);
     const [cryptoData, setCryptoData] = useState(null)
-    const [stockData, setSockData] = useState([])
+    const [stockData, setStockData] = useState(null);
 
-    const columns = [
+    const columnsCrypto = [
         {
           title: 'Name',
           dataIndex: 'name',
@@ -25,10 +25,24 @@ export const Portfolio = () => {
             key: 'quantity',
         }
     ];
+
+    const columnsStock = [
+        {
+          title: 'Symbol',
+          dataIndex: 'symbol',
+          key: 'symbol',
+        },
+        {
+            title: 'Quantity',
+            dataIndex: 'quantity',
+            key: 'quantity',
+        }
+    ];
+
     
     useEffect(() => {
-            const email = localStorage.getItem("email");
-            const token = localStorage.getItem("token");
+        const email = localStorage.getItem("email");
+        const token = localStorage.getItem("token");
         
         Axios.get("http://localhost:3001/port/availablecash", { params: { email: email, token: token }}).then((response) => {
             if( response.status === 200) {
@@ -43,10 +57,11 @@ export const Portfolio = () => {
         Axios.get("http://localhost:3001/port/availablecrypto", { params: { email: email, token: token }}).then((response) => {
                 if( response.status === 200) {
                     const cryptoData = response.data.map( e => ({
-                        key: e.id,
+                        key: e.name,
                         name: e.name,
                         quantity: e.volume
                     }))
+                    console.log(cryptoData)
                     setCryptoData(cryptoData);
                 }
             }).catch(function (error) {
@@ -55,20 +70,23 @@ export const Portfolio = () => {
                 }
             })
 
+        Axios.get("http://localhost:3001/port/availablestock", { params: { email: email, token: token }}).then((response) => {
+            if( response.status === 200) {
+                const stockData = response.data.map( e => ({
+                    key: e.symbol,
+                    symbol: e.symbol,
+                    quantity: e.volume
+                }))
+                console.log(stockData)
+                    setStockData(stockData);
+
+                }
+            }).catch(function (error) {
+                if (error.response) {
+                    setStockData(null);
+                }
+            })
     },[]);
-
-    /*useEffect(() => {
-        async function getData() {
-            const email = localStorage.getItem("email");
-            const token = localStorage.getItem("token");
-
-            await 
-        }
-        if (loadingData) {
-            // if the result is not ready so you make the axios call
-            getData();
-          }
-    },[]);*/
 
     if (cashData === null) {
         return null;
@@ -81,17 +99,10 @@ export const Portfolio = () => {
             <Row>
                 <Col span={6}><Statistic title="Total cash" value={cashData?.data?.amount} suffix={cashData?.data?.currecny} /></Col>
             </Row>
-            <StocksWrap>
-                <Title>Top 10 cryptos</Title>
-                <StockLink to="/cryptos">Daugiau...</StockLink>
-            </StocksWrap>
-            <Table dataSource={cryptoData} columns={columns} />
-            {/*<Cryptos simplified={true}/>
-            <StocksWrap>
-                <Title>Top 10 stocks</Title>
-                <StockLink to="/stocks">Daugiau...</StockLink>
-            </StocksWrap>
-            <Stocks simplified={true}/>*/}
+
+            <Table dataSource={cryptoData} columns={columnsCrypto} />
+            <Table dataSource={stockData} columns={columnsStock} />
+
         </Container>
         </>
     )

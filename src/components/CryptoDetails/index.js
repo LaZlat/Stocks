@@ -16,7 +16,9 @@ export const CryptoDetails = () => {
     const {data, isFetching} = useGetCryptoDetailsQuery(id);
     const {data: coinHistory} = useGetCryptoHistoryQuery({id, timePeriod});
     const cryptoDetails = data?.data?.coin;
-    const [volume, setVolume] = useState('0');
+    const [buyVolume, setBuyVolume] = useState('0');
+    const [sellVolume, setSellVolume] = useState('0');
+
 
 
     if (isFetching) return <Loader />;
@@ -41,12 +43,23 @@ export const CryptoDetails = () => {
     
     const buyCrypto = () => {
         Axios.post('http://localhost:3001/buy/buycrypto', {
-            uid: 1,
+            uid: localStorage.getItem("email"),
             cid: id,
             price: cryptoDetails.price,
             currency: 'USD',
-            volume: volume,
+            volume: buyVolume,
             name: cryptoDetails.name
+        }).then((response) => {
+            console.log(response)
+        })
+    }
+
+    const sellCrypto = () => {
+        Axios.post('http://localhost:3001/sell/sellcrypto', {
+            uid: localStorage.getItem("email"),
+            cid: id,
+            price: cryptoDetails.price,
+            volume: sellVolume,
         }).then((response) => {
             console.log(response)
         })
@@ -73,9 +86,20 @@ export const CryptoDetails = () => {
                               <FormH1>Pirkti</FormH1>
                               <FormLabel hmtlFor='for'>Kiekis</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
-                                  setVolume(e.target.value)
+                                  setBuyVolume(e.target.value)
                               }}/>
                               <FormButton type='button' onClick={buyCrypto}>Pirkti</FormButton>
+                          </Form>
+                </FormContent>
+
+                <FormContent>
+                          <Form>
+                              <FormH1>Parduoti</FormH1>
+                              <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormInput type='number' min='1' required onChange={(e) => {
+                                  setSellVolume(e.target.value)
+                              }}/>
+                              <FormButton type='button' onClick={sellCrypto}>Parduoti</FormButton>
                           </Form>
                 </FormContent>
 

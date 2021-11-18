@@ -15,7 +15,8 @@ export const StockDetails = () => {
     const [interval, setInterval] = useState('1d');
     const {data, isFetching} = useGetStockQuery(symbol);
     const {data: stockHistory} = useGetHistoryQuery({symbol, interval});
-    const [volume, setVolume] = useState('0');
+    const [buyVolume, setSellVolume] = useState('0');
+    const [sellVolume, setBuyVolume] = useState('0');
     const stockDetails = data;
 
     
@@ -48,12 +49,23 @@ export const StockDetails = () => {
     ];
 
     const buyStock = () => {
-        Axios.post('http://localhost:3001/buy/buycrypto', {
-            uid: 1,
+        Axios.post('http://localhost:3001/buy/buystock', {
+            uid: localStorage.getItem("email"),
             symbol: symbol,
             price: stockDetails[0].ask,
             currency: 'USD',
-            volume: volume
+            volume: buyVolume
+        }).then((response) => {
+            console.log(response)
+        })
+    }
+
+    const sellStock = () => {
+        Axios.post('http://localhost:3001/sell/sellstock', {
+            uid: localStorage.getItem("email"),
+            symbol: symbol,
+            price: stockDetails[0].ask,
+            volume: sellVolume
         }).then((response) => {
             console.log(response)
         })
@@ -82,11 +94,23 @@ export const StockDetails = () => {
                               <FormH1>Pirkti</FormH1>
                               <FormLabel hmtlFor='for'>Kiekis</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
-                                  setVolume(e.target.value)
+                                  setBuyVolume(e.target.value)
                               }}/>
                               <FormButton type='button' onClick={buyStock}>Pirkti</FormButton>
                           </Form>
                 </FormContent>
+
+                <FormContent>
+                          <Form>
+                              <FormH1>Parduoti</FormH1>
+                              <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormInput type='number' min='1' required onChange={(e) => {
+                                  setSellVolume(e.target.value)
+                              }}/>
+                              <FormButton type='button' onClick={sellStock}>PArduoti</FormButton>
+                          </Form>
+                </FormContent>
+                
                 
                 <Col className="stats-container">
                     <Col className="coin-value-stats">
