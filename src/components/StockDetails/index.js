@@ -17,6 +17,8 @@ export const StockDetails = () => {
     const {data: stockHistory} = useGetHistoryQuery({symbol, interval});
     const [buyVolume, setSellVolume] = useState('0');
     const [sellVolume, setBuyVolume] = useState('0');
+    const [sellResponse, setSellResponse] = useState("");
+    const [buyResponse, setBuyResponse] = useState("");
     const stockDetails = data;
 
     
@@ -56,7 +58,7 @@ export const StockDetails = () => {
             currency: 'USD',
             volume: buyVolume
         }).then((response) => {
-            console.log(response)
+            setBuyResponse(response.data.msg)
         })
     }
 
@@ -67,7 +69,7 @@ export const StockDetails = () => {
             price: stockDetails[0].ask,
             volume: sellVolume
         }).then((response) => {
-            console.log(response)
+            setSellResponse(response.data.msg)
         })
     }
    
@@ -93,6 +95,7 @@ export const StockDetails = () => {
                           <Form>
                               <FormH1>Pirkti</FormH1>
                               <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormLabel hmtlFor='for'>{buyResponse}</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setBuyVolume(e.target.value)
                               }}/>
@@ -104,6 +107,7 @@ export const StockDetails = () => {
                           <Form>
                               <FormH1>Parduoti</FormH1>
                               <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormLabel hmtlFor='for'>{sellResponse}</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setSellVolume(e.target.value)
                               }}/>

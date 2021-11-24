@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import millify from 'millify';
-import { Typography, Row, Col, Statistic, Table } from 'antd';
+import { Typography, Row, Col, Statistic, Table, Space, Button } from 'antd';
 import {Container, Title, StocksWrap, StockLink} from '../Portfolio/PortfolioElements';
 import {Cryptos} from '../Cryptos';
 import {Stocks} from '../Stocks';
@@ -23,6 +23,16 @@ export const Portfolio = () => {
             title: 'Quantity',
             dataIndex: 'quantity',
             key: 'quantity',
+        },
+        {
+            title: 'Pirkti/Parduoti',
+            dataIndex: 'pirkti/parduoti',
+            key: 'pirkti/parduoti',
+            render: (rec) => (
+                <Space size="middle">
+                  <a href={"/stock/" + rec?.name}>Pirkti/Parduoti</a>
+                </Space>
+            ),
         }
     ];
 
@@ -36,6 +46,15 @@ export const Portfolio = () => {
             title: 'Quantity',
             dataIndex: 'quantity',
             key: 'quantity',
+        },
+        {
+            title: 'Pirkti/Parduoti',
+            key: 'pirkti/parduoti',
+            render: (record) => (
+                <Space size="middle">
+                  <a href={"/stock/" + record?.symbol}>Pirkti/Parduoti</a>
+                </Space>
+              ),
         }
     ];
 
@@ -54,6 +73,22 @@ export const Portfolio = () => {
             }
         })
 
+        Axios.get("http://localhost:3001/port/availablestock", { params: { email: email, token: token }}).then((response) => {
+            if( response.status === 200) {
+                const stockData = response.data.map( e => ({
+                    key: e.symbol,
+                    symbol: e.symbol,
+                    quantity: e.volume
+                }))
+                    setStockData(stockData);
+
+                }
+            }).catch(function (error) {
+                if (error.response) {
+                    setStockData(null);
+                }
+            })
+
         Axios.get("http://localhost:3001/port/availablecrypto", { params: { email: email, token: token }}).then((response) => {
                 if( response.status === 200) {
                     const cryptoData = response.data.map( e => ({
@@ -66,29 +101,13 @@ export const Portfolio = () => {
                 }
             }).catch(function (error) {
                 if (error.response) {
+                    console.log(cryptoData)
                     setCryptoData(null);
-                }
-            })
-
-        Axios.get("http://localhost:3001/port/availablestock", { params: { email: email, token: token }}).then((response) => {
-            if( response.status === 200) {
-                const stockData = response.data.map( e => ({
-                    key: e.symbol,
-                    symbol: e.symbol,
-                    quantity: e.volume
-                }))
-                console.log(stockData)
-                    setStockData(stockData);
-
-                }
-            }).catch(function (error) {
-                if (error.response) {
-                    setStockData(null);
                 }
             })
     },[]);
 
-    if (cashData === null) {
+    if (cashData === null || cryptoData === null) {
         return null;
     }
 
@@ -100,8 +119,8 @@ export const Portfolio = () => {
                 <Col span={6}><Statistic title="Total cash" value={cashData?.data?.amount} suffix={cashData?.data?.currecny} /></Col>
             </Row>
 
-            <Table dataSource={cryptoData} columns={columnsCrypto} />
-            <Table dataSource={stockData} columns={columnsStock} />
+            <Table dataSource={cryptoData} columns={columnsCrypto} pagination={false} />
+            <Table dataSource={stockData} columns={columnsStock} pagination={false} />
 
         </Container>
         </>

@@ -14,6 +14,7 @@ import StocksPage from './pages/stocks';
 import StockDetailsPage from './pages/stock';
 import {ProtectedRoute} from "./ProtectedRoute";
 import PortfolioPage from './pages/portfolio';
+import AutoPage from './pages/auto';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <ProtectedRoute exact path ="/stocks" component={StocksPage} />
         <ProtectedRoute exact path ="/stock/:symbol" component={StockDetailsPage} />
         <ProtectedRoute exact path ="/portfolio" component={PortfolioPage} />
+        <ProtectedRoute exact path ="/auto" component={AutoPage} />
       </Switch>
       <Footer />
       </Provider>

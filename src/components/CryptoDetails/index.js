@@ -18,6 +18,14 @@ export const CryptoDetails = () => {
     const cryptoDetails = data?.data?.coin;
     const [buyVolume, setBuyVolume] = useState('0');
     const [sellVolume, setSellVolume] = useState('0');
+    const [sellResponse, setSellResponse] = useState("");
+    const [buyResponse, setBuyResponse] = useState("");
+    const [autoBuyVolume, setAutoBuyVolume] = useState('0');
+    const [autoSellVolume, setAutoSellVolume] = useState('0');
+    const [autoBuyPrice, setAutoBuyPrice] = useState('0');
+    const [autoSellPrice, setAutoSellPrice] = useState('0');
+    const [autoSellResponse, setAutoSellResponse] = useState("");
+    const [autoBuyResponse, setAutoBuyResponse] = useState("");
 
 
 
@@ -50,7 +58,7 @@ export const CryptoDetails = () => {
             volume: buyVolume,
             name: cryptoDetails.name
         }).then((response) => {
-            console.log(response)
+            setBuyResponse(response.data.msg)
         })
     }
 
@@ -61,7 +69,33 @@ export const CryptoDetails = () => {
             price: cryptoDetails.price,
             volume: sellVolume,
         }).then((response) => {
-            console.log(response)
+            setSellResponse(response.data.msg)
+        })
+    }
+
+    const autoSell = () => {
+        Axios.post('http://localhost:3001/auto/sellcrypto', {
+            uid: localStorage.getItem("email"),
+            cid: id,
+            price: autoSellPrice,
+            volume: autoSellVolume,
+            name: cryptoDetails.name,
+            sell: 1
+        }).then((response) => {
+            setAutoSellResponse(response.data.msg)
+        })
+    }
+
+    const autoBuy = () => {
+        Axios.post('http://localhost:3001/auto/buycrypto', {
+            uid: localStorage.getItem("email"),
+            cid: id,
+            price: autoSellPrice,
+            volume: autoSellVolume,
+            name: cryptoDetails.name,
+            sell: 0
+        }).then((response) => {
+            setAutoBuyResponse(response.data.msg)
         })
     }
 
@@ -85,6 +119,7 @@ export const CryptoDetails = () => {
                           <Form>
                               <FormH1>Pirkti</FormH1>
                               <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormLabel hmtlFor='for'>{buyResponse}</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setBuyVolume(e.target.value)
                               }}/>
@@ -96,10 +131,43 @@ export const CryptoDetails = () => {
                           <Form>
                               <FormH1>Parduoti</FormH1>
                               <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormLabel hmtlFor='for'>{sellResponse}</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setSellVolume(e.target.value)
                               }}/>
                               <FormButton type='button' onClick={sellCrypto}>Parduoti</FormButton>
+                          </Form>
+                </FormContent>
+
+                <FormContent>
+                          <Form>
+                              <FormH1>Auto pardavimas</FormH1>
+                              <FormLabel hmtlFor='for'>{autoSellResponse}</FormLabel>
+                              <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormInput type='number' min='1' required onChange={(e) => {
+                                  setAutoSellVolume(e.target.value)
+                              }}/>
+                              <FormLabel hmtlFor='for'>Kaina</FormLabel>
+                              <FormInput type='number' min='1' required onChange={(e) => {
+                                  setAutoSellPrice(e.target.value)
+                              }}/>
+                              <FormButton type='button' onClick={autoSell}>Kurti pardavima</FormButton>
+                          </Form>
+                </FormContent>
+
+                <FormContent>
+                          <Form>
+                              <FormH1>Auto pirkimas</FormH1>
+                              <FormLabel hmtlFor='for'>{autoBuyResponse}</FormLabel>
+                              <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormInput type='number' min='1' required onChange={(e) => {
+                                  setAutoBuyVolume(e.target.value)
+                              }}/>
+                              <FormLabel hmtlFor='for'>Kaina</FormLabel>
+                              <FormInput type='number' min='1' required onChange={(e) => {
+                                  setAutoBuyPrice(e.target.value)
+                              }}/>
+                              <FormButton type='button' onClick={autoBuy}>Kurti pirkima</FormButton>
                           </Form>
                 </FormContent>
 

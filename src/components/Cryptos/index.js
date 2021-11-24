@@ -4,6 +4,7 @@ import { Row, Col} from 'antd';
 import { CryptoContainer, CryptoCard, CryptoLink, Image, SearchCrypto, CryptoInput} from './CryptosElements';
 import Loader from '../Loader';
 import { useGetCryptosQuery } from '../../services/cryptoAPI';
+import Axios from "axios";
 
 export const Cryptos = ({simplified}) => {
     const amountToSlice = simplified ? 10 : 50;
