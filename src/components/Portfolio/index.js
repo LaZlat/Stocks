@@ -15,6 +15,11 @@ export const Portfolio = () => {
 
     const columnsCrypto = [
         {
+            title: 'Nr',
+            dataIndex: 'nr',
+            key: 'nr',
+          },
+        {
           title: 'Name',
           dataIndex: 'name',
           key: 'name',
@@ -28,10 +33,8 @@ export const Portfolio = () => {
             title: 'Pirkti/Parduoti',
             dataIndex: 'pirkti/parduoti',
             key: 'pirkti/parduoti',
-            render: (rec) => (
-                <Space size="middle">
-                  <a href={"/stock/" + rec?.name}>Pirkti/Parduoti</a>
-                </Space>
+            render: (text, record) => (
+                  <StockLink to={`/crypto/${record.nr}`}>Pirkti/Parduoti</StockLink>
             ),
         }
     ];
@@ -57,6 +60,24 @@ export const Portfolio = () => {
               ),
         }
     ];
+
+    const generateCSV = () => {
+        const email = localStorage.getItem("email");
+        const token = localStorage.getItem("token");
+
+        Axios.get('http://localhost:3001/port/generatecsv', { params: { email: email, token: token }})
+        .then((response) => {
+            let link = document.createElement('a')
+            link.id = 'download-csv'
+            link.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response.data));
+            link.setAttribute('download', 'portfolio_' + email + '.csv');
+            document.body.appendChild(link)
+            document.querySelector('#download-csv').click()
+        })
+
+
+
+    }
 
     
     useEffect(() => {
@@ -92,7 +113,8 @@ export const Portfolio = () => {
         Axios.get("http://localhost:3001/port/availablecrypto", { params: { email: email, token: token }}).then((response) => {
                 if( response.status === 200) {
                     const cryptoData = response.data.map( e => ({
-                        key: e.name,
+                        key: e.cid,
+                        nr: e.cid,
                         name: e.name,
                         quantity: e.volume
                     }))
@@ -121,6 +143,9 @@ export const Portfolio = () => {
 
             <Table dataSource={cryptoData} columns={columnsCrypto} pagination={false} />
             <Table dataSource={stockData} columns={columnsStock} pagination={false} />
+
+            <button type="button" onClick={generateCSV}>Generuoti ataskaitą</button>
+
 
         </Container>
         </>

@@ -54,7 +54,6 @@ export const CryptoDetails = () => {
             uid: localStorage.getItem("email"),
             cid: id,
             price: cryptoDetails.price,
-            currency: 'USD',
             volume: buyVolume,
             name: cryptoDetails.name
         }).then((response) => {
@@ -90,8 +89,8 @@ export const CryptoDetails = () => {
         Axios.post('http://localhost:3001/auto/buycrypto', {
             uid: localStorage.getItem("email"),
             cid: id,
-            price: autoSellPrice,
-            volume: autoSellVolume,
+            price: autoBuyPrice,
+            volume: autoBuyVolume,
             name: cryptoDetails.name,
             sell: 0
         }).then((response) => {

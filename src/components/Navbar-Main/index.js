@@ -47,6 +47,9 @@ const NavbarMain = ({toggle}) => {
                         <NavItem>
                             <NavLinks2 to='/portfolio'><FundOutlined />Portfolio</NavLinks2>
                         </NavItem>
+                        <NavItem>
+                            <NavLinks2 to='/auto'><FundOutlined />Automatinis</NavLinks2>
+                        </NavItem>
                     </NavMenu>
                     <NavBtn>
                         <NavBtnLink to='/'>Atsijungti</NavBtnLink>
