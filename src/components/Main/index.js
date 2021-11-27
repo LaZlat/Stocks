@@ -5,6 +5,7 @@ import {Container, Title, StocksWrap, StockLink} from '../Main/MainElements';
 import {useGetCryptosQuery} from '../../services/cryptoAPI';
 import {Cryptos} from '../Cryptos';
 import {Stocks} from '../Stocks';
+import {News} from '../News';
 import Loader from '../Loader';
 
 export const Homepage = () => {
@@ -34,6 +35,11 @@ export const Homepage = () => {
                 <StockLink to="/stocks">Daugiau...</StockLink>
             </StocksWrap>
             <Stocks simplified={true}/>
+            <StocksWrap>
+                <Title>Papildoma med=iaga</Title>
+                <StockLink to="/news">Daugiau...</StockLink>
+            </StocksWrap>
+            <News simplified={true}/>
         </Container>
         </>
     )

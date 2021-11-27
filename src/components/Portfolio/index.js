@@ -74,9 +74,6 @@ export const Portfolio = () => {
             document.body.appendChild(link)
             document.querySelector('#download-csv').click()
         })
-
-
-
     }
 
     

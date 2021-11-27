@@ -50,6 +50,12 @@ const NavbarMain = ({toggle}) => {
                         <NavItem>
                             <NavLinks2 to='/auto'><FundOutlined />Automatinis</NavLinks2>
                         </NavItem>
+                        <NavItem>
+                            <NavLinks2 to='/news'><FundOutlined />MedŽiaga</NavLinks2>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinks2 to='/settings'><FundOutlined />Nustatymai</NavLinks2>
+                        </NavItem>
                     </NavMenu>
                     <NavBtn>
                         <NavBtnLink to='/'>Atsijungti</NavBtnLink>

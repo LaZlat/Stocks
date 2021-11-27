@@ -112,6 +112,21 @@ export const Auto = () => {
         }
     ];
 
+    const generateCSV = () => {
+        const email = localStorage.getItem("email");
+        const token = localStorage.getItem("token");
+
+        Axios.get('http://localhost:3001/auto/generatecsv', { params: { email: email, token: token }})
+        .then((response) => {
+            let link = document.createElement('a')
+            link.id = 'download-csv'
+            link.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response.data));
+            link.setAttribute('download', 'autos_' + email + '.csv');
+            document.body.appendChild(link)
+            document.querySelector('#download-csv').click()
+        })
+    }
+
     const deleteAuto = (id) => {
         Axios.post('http://localhost:3001/auto/deleteautocrypto', {
             deleteId: id
@@ -179,6 +194,7 @@ export const Auto = () => {
             <Table dataSource={cryptoData} columns={columnsCrypto} pagination={true} />
             <Table dataSource={stockData} columns={columnsStock} pagination={true} />
 
+            <button type="button" onClick={generateCSV}>Generuoti ataskaitą</button>
 
         </>
     )

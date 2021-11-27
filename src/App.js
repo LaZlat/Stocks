@@ -15,7 +15,8 @@ import StockDetailsPage from './pages/stock';
 import {ProtectedRoute} from "./ProtectedRoute";
 import PortfolioPage from './pages/portfolio';
 import AutoPage from './pages/auto';
-
+import NewsPage from './pages/news';
+import SettingsPage from './pages/settings';
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
         <ProtectedRoute exact path ="/stock/:symbol" component={StockDetailsPage} />
         <ProtectedRoute exact path ="/portfolio" component={PortfolioPage} />
         <ProtectedRoute exact path ="/auto" component={AutoPage} />
+        <ProtectedRoute exact path ="/news" component={NewsPage} />
+        <ProtectedRoute exact path ="/settings" component={SettingsPage} />
       </Switch>
       <Footer />
       </Provider>
