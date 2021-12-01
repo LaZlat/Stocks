@@ -9,23 +9,26 @@ export const Signup = () => {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
 
-    const [h1Text, setH1Text] = useState("Sign Up HAHAHA");
+    const [title, setTitle] = useState("Registracija");
 
     const signup = () => {
         if (password !== password2) {
-            setH1Text("Slaptažodžiai nesutampa");
+            setTitle("Slaptažodžiai nesutampa");
         } else if (!re.test(email)) {
-            setH1Text("Netinkamas email formatas");
+            setTitle("Netinkamas el. pašto formatas");
         } else {
+            console.log("AAAAAA")
             Axios.post('http://localhost:3001/signup', {
                 name: name,
                 email: email,
                 password: password
             }).then((response) => {
-                if(response.data.msg  !== "taken") {
+                if(response.status === 200) {
                   window.location = "/signin";
-                } else {
-                  setH1Text("Email is already taken");
+                }
+            }).catch(err => {
+                if(err.response.status === 404) {
+                    setTitle("El. paštas jau naudojamas");
                 }
             })
         }
@@ -38,20 +41,20 @@ export const Signup = () => {
                   <Icon to='/'>Elektroniniai Mainai</Icon>
                       <FormContent>
                           <Form>
-                              <FormH1>{h1Text}</FormH1>
-                              <FormLabel hmtlFor='for'>Username</FormLabel>
+                              <FormH1>{title}</FormH1>
+                              <FormLabel hmtlFor='for'>Vardas</FormLabel>
                               <FormInput type='text' required onChange={(e) => {
                                   setName(e.target.value)
                               }}/>
-                              <FormLabel hmtlFor='for'>Email</FormLabel>
+                              <FormLabel hmtlFor='for'>Elektroninis paštas</FormLabel>
                               <FormInput type='email' required onChange={(e) => {
                                   setEmail(e.target.value)
                               }}/>
-                              <FormLabel hmtlFor='for'>Password</FormLabel>
+                              <FormLabel hmtlFor='for'>Slaptažodis</FormLabel>
                               <FormInput type='password' required onChange={(e) => {
                                   setPassword(e.target.value)
                               }}/>
-                               <FormLabel hmtlFor='for'>Repeat password</FormLabel>
+                               <FormLabel hmtlFor='for'>Pakartoti slaptažodį</FormLabel>
                                 <FormInput type='password' required onChange={(e) => {
                                   setPassword2(e.target.value)
                               }}/>

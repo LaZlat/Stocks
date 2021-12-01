@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useHistory } from "react-router-dom";
 import { HeroContainer, HeroBg, VideoBg, HeroContent, HeroH1, HeroP, HeroBtwnWrapper, ArrowForward, ArrowRight} from './HeroElements'
 import Video from '../../videos/video.mp4';
 import { Button } from '../ButtonElements';
@@ -6,6 +7,7 @@ import { Button } from '../ButtonElements';
 const HeroSection = () => {
     const [hover, setHover] = useState(false);
 
+    const history = useHistory();
     const onHover = () => {
         setHover(!hover)
     };
@@ -17,11 +19,11 @@ const HeroSection = () => {
             </HeroBg>
             <HeroContent>
                 <HeroH1>Elektroniniai Mainai</HeroH1>
-                <HeroP>TEKSTAS TEKSTAS TEKSTAS TEKSTAS UZSIREGINK IR BUS GERAI TEKSTAS</HeroP>
+                <HeroP>Mokomoji vertybinių popierių ir virtualių valiutų mainų sistema</HeroP>
                 <HeroBtwnWrapper>
-                    <Button to='signup' onMouseEnter={onHover} onMouseLeave={onHover}
+                    <Button to='signup' onMouseEnter={onHover} onMouseLeave={onHover} onClick={(e) => history.push('/signin')}
                     primary='true' dark='true'>
-                        Get Started {hover ? <ArrowForward/> : <ArrowRight/>}
+                        Prisijungti {hover ? <ArrowForward/> : <ArrowRight/>}
                     </Button>
             </HeroBtwnWrapper>
             </HeroContent>

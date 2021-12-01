@@ -126,7 +126,7 @@ export const Portfolio = () => {
             })
     },[]);
 
-    if (cashData === null || cryptoData === null) {
+    if (cashData === null) {
         return null;
     }
 

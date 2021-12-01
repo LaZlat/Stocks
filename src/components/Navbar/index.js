@@ -32,20 +32,20 @@ const Navbar = ({toggle}) => {
                     </MobileIcon>
                     <NavMenu>
                         <NavItem>
-                            <NavLinks to='about' smooth={true} duration={500} spy={true} exact='true' offset={0}>About</NavLinks>
+                            <NavLinks to='about' smooth={true} duration={500} spy={true} exact='true' offset={0}>Peržiūra</NavLinks>
                         </NavItem>
                         <NavItem>
-                            <NavLinks to='discover' smooth={true} duration={500} spy={true} exact='true' offset={100}>Discover</NavLinks>
+                            <NavLinks to='discover' smooth={true} duration={500} spy={true} exact='true' offset={100}>Prekyba</NavLinks>
                         </NavItem>
                         <NavItem>
-                            <NavLinks to='services' smooth={true} duration={500} spy={true} exact='true' offset={100}>Services</NavLinks>
+                            <NavLinks to='third' smooth={true} duration={500} spy={true} exact='true' offset={100}>Žinios</NavLinks>
                         </NavItem>
                     </NavMenu>
                     <NavBtn>
-                        <NavBtnLink2 to='/signup'>Sign Up</NavBtnLink2>
+                        <NavBtnLink2 to='/signup'>Registruotis</NavBtnLink2>
                     </NavBtn>
                     <NavBtn>
-                        <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+                        <NavBtnLink to='/signin'>Prisijungti</NavBtnLink>
                     </NavBtn>
                 </NavbarContainer>
             </Nav>

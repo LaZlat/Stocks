@@ -3,18 +3,14 @@ import {Link} from 'react-router-dom';
 
 export const Container = styled.div`
     min-height: 692px;
-    position: fixed;
+    position: relative;
     bottom: 0;
     top: 0;
     left: 0;
     right: 0;
     z-index: 0;
     overflow: hidden;
-    background: linear-gradient(
-        108deg,
-        rgba(1, 147, 86, 1) 0%,
-        rgba(10, 201, 122, 1) 100%
-    );
+    background: #101522
 `;
 
 export const FormWrap = styled.div`
@@ -31,8 +27,9 @@ export const FormWrap = styled.div`
 export const Icon = styled(Link)`
     margin-left: 32px;
     margin-top: 32px;
+    margin-bottom: 32px;
     text-decoration: none;
-    color: #fff;
+    color: #01bf71;
     font-weight: 700;
     font-size: 32px;
 
@@ -40,6 +37,11 @@ export const Icon = styled(Link)`
         margin-left: 16px;
         margin-top: 8px
     };
+
+    &:hover {
+        transition: all 0.2 ease-in-out;
+        color: #fff;
+    }
 `;
 
 export const FormContent = styled.div`
@@ -99,11 +101,22 @@ export const FormButton = styled.button`
     color: #fff;
     font-size: 20px;
     cursor: pointer;
+
+    &:hover {
+        transition: all 0.2 ease-in-out;
+        background: #fff;
+        color: #01bf71;
+    }
 `;
 
-export const Text = styled.span`
+export const Text = styled.a`
     text-align: center;
     margin-top: 24px;
     color: #fff;
     font-size: 14px;
+
+    &:hover {
+        transition: all 0.2 ease-in-out;
+        color: #01bf71;
+    }
 `;

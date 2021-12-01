@@ -15,8 +15,8 @@ export const StockDetails = () => {
     const [interval, setInterval] = useState('1d');
     const {data, isFetching} = useGetStockQuery(symbol);
     const {data: stockHistory} = useGetHistoryQuery({symbol, interval});
-    const [buyVolume, setSellVolume] = useState('0');
-    const [sellVolume, setBuyVolume] = useState('0');
+    const [buyVolume, setBuyVolume] = useState('0');
+    const [sellVolume, setSellVolume] = useState('0');
     const [sellResponse, setSellResponse] = useState("");
     const [buyResponse, setBuyResponse] = useState("");
     const [autoBuyVolume, setAutoBuyVolume] = useState('0');
