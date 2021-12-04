@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks2, NavBtn, NavBtnLink} from '../Navbar/NavbarElements';
+import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks2, NavBtn, NavBtnLink} from '../Navbar-Main/NavbarMainElements';
 import {FaBars} from 'react-icons/fa';
 import { animateScroll as scroll } from 'react-scroll';
-import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOutlined } from '@ant-design/icons';
+import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, CiOutlined, StarOutlined, KeyOutlined } from '@ant-design/icons';
 
 
 const NavbarMain = ({toggle}) => {
@@ -36,25 +36,25 @@ const NavbarMain = ({toggle}) => {
                     </MobileIcon>
                     <NavMenu>
                         <NavItem>
-                            <NavLinks2 to='/main'><HomeOutlined/> Main</NavLinks2>
+                            <NavLinks2 to='/main'><HomeOutlined/> Pagrindinis</NavLinks2>
                         </NavItem>
                         <NavItem>
-                            <NavLinks2 to='/cryptos'><MoneyCollectOutlined/>Cryptos</NavLinks2>
+                            <NavLinks2 to='/cryptos'><MoneyCollectOutlined/> Virtualios valiutos</NavLinks2>
                         </NavItem>
                         <NavItem>
-                            <NavLinks2 to='/stocks'><BulbOutlined />Stocks</NavLinks2>
+                            <NavLinks2 to='/stocks'><BulbOutlined /> Vertybiniai popieriai</NavLinks2>
                         </NavItem>
                         <NavItem>
-                            <NavLinks2 to='/portfolio'><FundOutlined />Portfolio</NavLinks2>
+                            <NavLinks2 to='/portfolio'><FundOutlined /> Portfelis</NavLinks2>
                         </NavItem>
                         <NavItem>
-                            <NavLinks2 to='/auto'><FundOutlined />Automatinis</NavLinks2>
+                            <NavLinks2 to='/auto'><CiOutlined /> Automatizavimas</NavLinks2>
                         </NavItem>
                         <NavItem>
-                            <NavLinks2 to='/news'><FundOutlined />MedŽiaga</NavLinks2>
+                            <NavLinks2 to='/news'><StarOutlined /> Mokomoji medžiaga</NavLinks2>
                         </NavItem>
                         <NavItem>
-                            <NavLinks2 to='/settings'><FundOutlined />Nustatymai</NavLinks2>
+                            <NavLinks2 to='/settings'><KeyOutlined /> Nustatymai</NavLinks2>
                         </NavItem>
                     </NavMenu>
                     <NavBtn>

@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import millify from 'millify';
 import { Row, Col} from 'antd';
-import { CryptoContainer, CryptoCard, CryptoLink, Image, SearchCrypto, CryptoInput} from './CryptosElements';
+import { CryptoContainer, CryptoCard, CryptoLink, Image, SearchCrypto, CryptoInput, Container, Title, Greeting} from './CryptosElements';
 import Loader from '../Loader';
 import { useGetCryptosQuery } from '../../services/cryptoAPI';
-import Axios from "axios";
 
 export const Cryptos = ({simplified}) => {
     const amountToSlice = simplified ? 10 : 50;
@@ -22,10 +21,15 @@ export const Cryptos = ({simplified}) => {
 
     return (
         <>
+        <Container>
         {!simplified && (
+        <>
+        <Greeting>Virtualios valiutos</Greeting>
         <SearchCrypto>
-            <CryptoInput placeholder="ieškoti" onChange={(e) => setSearchTerm(e.target.value)}/>
+        <Title>Rasti virtualias valiutas</Title>
+            <CryptoInput placeholder="Virtualios valiutos" onChange={(e) => setSearchTerm(e.target.value)}/>
         </SearchCrypto>
+        </>
         )}
         <CryptoContainer>
             <Row gutter={[32, 32]}>
@@ -34,15 +38,16 @@ export const Cryptos = ({simplified}) => {
                         <Col xs={24} sm={12} lg={6} key={currency.id}>
                             <CryptoLink to={`/crypto/${currency.id}`}>
                                 <CryptoCard title={`${currency.rank}. ${currency.name}`} extra={<Image src={currency.iconUrl} />} hoverable>
-                                    <p>Price: {millify(currency.price)}</p>
-                                    <p>Market Cap: {millify(currency.marketCap)}</p>
-                                    <p>Daily Change: {millify(currency.change)}%</p>
+                                    <p>Kaina: {millify(currency.price)} USD</p>
+                                    <p>Rinkos vertė: {millify(currency.marketCap)} USD</p>
+                                    <p>Kainos pokytis šiandien: {millify(currency.change)}%</p>
                                 </CryptoCard>
                             </CryptoLink>
                         </Col>               
                 ))}
             </Row>
         </CryptoContainer>
+        </Container>
         </>
     )
 }

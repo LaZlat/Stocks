@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Loader from '../Loader';
 import { Row, Col} from 'antd';
-import { StockContainer, StockCard, StockLink, SearchStock, StockInput} from './StocksElements';
+import { StockContainer, StockCard, StockLink, SearchStock, StockInput, Title, Greeting, Container} from './StocksElements';
 import millify from 'millify';
 import { useGetMostActivesQuery } from '../../services/financeAPI';
 
@@ -21,10 +21,15 @@ export const Stocks = ({simplified}) => {
 
     return (
         <>
+        <Container>
         {!simplified && (
+        <>
+        <Greeting>Vertybiniai popieriai</Greeting>
         <SearchStock>
-            <StockInput placeholder="ieškoti" onChange={(e) => setSearchTerm(e.target.value)}/>
+            <Title>Rasti vertybinius popierius</Title>
+            <StockInput placeholder="Vertybiniai popieriai" onChange={(e) => setSearchTerm(e.target.value)}/>
         </SearchStock>
+        </>
         )}
         <StockContainer>
             <Row gutter={[32, 32]}>
@@ -33,15 +38,16 @@ export const Stocks = ({simplified}) => {
                         <Col xs={24} sm={12} lg={6} key={stock.symbol}>
                             <StockLink to={`/stock/${stock.symbol}`}>
                                 <StockCard title={`${stock.displayName}`} hoverable>
-                                    <p>Price: {millify(stock.regularMarketPrice)}</p>
-                                    <p>Market Cap: {millify(stock.marketCap)}</p>
-                                    <p>Daily Change: {millify(stock.regularMarketChangePercent)}%</p>
+                                    <p>Kaina: {millify(stock.regularMarketPrice)} USD</p>
+                                    <p>Rinkos vertė: {millify(stock.marketCap)} USD</p>
+                                    <p>Kainos pokytis šiandien: {millify(stock.regularMarketChangePercent)}%</p>
                                 </StockCard>
                             </StockLink>
                         </Col>               
                 ))}
             </Row>
         </StockContainer>
+        </Container>
         </>
     )
 }

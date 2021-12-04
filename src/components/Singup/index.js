@@ -17,7 +17,6 @@ export const Signup = () => {
         } else if (!re.test(email)) {
             setTitle("Netinkamas el. pašto formatas");
         } else {
-            console.log("AAAAAA")
             Axios.post('http://localhost:3001/signup', {
                 name: name,
                 email: email,

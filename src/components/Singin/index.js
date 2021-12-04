@@ -18,11 +18,10 @@ export const Signin = () => {
             email: email,
             password: password
         }).then((res) => {
-            console.log(res)
-
             if (res.status === 200){
                 localStorage.setItem("token", res.data.token)
                 localStorage.setItem("email", res.data.email)
+                localStorage.setItem("name", res.data.name)
                 history.push(`/main`);
             }
         }).catch(err => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import Home from './pages/index';
 import Footer from './components/Footer';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
