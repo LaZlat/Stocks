@@ -56,6 +56,8 @@ export const FormContent = styled.div`
 `;
 
 export const Form = styled.form`
+    border-color: #01bf71;
+    border-style: solid;
     background: #010101;
     max-width: 400px;
     height: auto;

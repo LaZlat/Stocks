@@ -43,9 +43,10 @@ export const Text = styled(Typography)`
     margin-bottom: 1.1rem;
 `;
 
-export const PortLink = styled(Link)`
+export const AutoBtn = styled.span`
     text-align: center;
     color: #000;
+    cursor: pointer;
 
     &:hover {
         transition: all 0.2 ease-in-out;

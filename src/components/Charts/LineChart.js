@@ -1,6 +1,8 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
 import {Col, Row, Typography} from 'antd';
+import { Container} from './ChartElements';
+
 
 const LineChart = ({coinHistory, currentPrice, coinName}) => {
     const coinPrice = [];
@@ -14,7 +16,7 @@ const LineChart = ({coinHistory, currentPrice, coinName}) => {
     const data = {
         labels: coinTimestamp,
         datasets: [{
-            label: 'Price in USD',
+            label: 'Kaina USD',
             data: coinPrice,
             fill: false,
             backgroundColor: '#0071bd',
@@ -36,20 +38,24 @@ const LineChart = ({coinHistory, currentPrice, coinName}) => {
 
     return (
         <>
-            <Row className="chart-header">
-                <Typography level={2} className="chart-title">
-                    {coinName} Price chart
+        <Container>
+            <Row>
+            <Col>
+                <Typography level={2}>
+                    {coinName} kainos pokytis: {coinHistory?.data?.change}%
                 </Typography>
-                <Col className="price-container">
-                    <Typography className="price-change" level={5}>
-                        {coinHistory?.data?.change}%
-                    </Typography>
-                    <Typography className="price-current" level={5}>
-                        Current {coinName} Price: $ {currentPrice}
+                </Col>
+                </Row>
+                <Row>
+                <Col>
+                    
+                    <Typography level={5}>
+                        Dabartinė {coinName} kaina: $ {currentPrice}
                     </Typography>
                 </Col>
             </Row>
             <Line data={data} options={options} />
+        </Container>
         </>
     )
 }

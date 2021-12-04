@@ -49,6 +49,8 @@ export const FormContent = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    border-color: #01bf71;
+    border-style: solid;
 
     @media screen and (max-width: 480px) {
         padding: 10px;

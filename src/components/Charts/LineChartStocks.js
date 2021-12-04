@@ -1,6 +1,7 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
-import {Col, Row, Typography} from 'antd';
+import {Row, Typography} from 'antd';
+import { Container} from './ChartElements';
 
 const LineChartStocks = ({stockHistory, currentPrice, stockSymbol}) => {
     const stockPrice = [];
@@ -26,7 +27,7 @@ const LineChartStocks = ({stockHistory, currentPrice, stockSymbol}) => {
     const data = {
         labels: stockTimestamp,
         datasets: [{
-            label: 'Price in USD',
+            label: 'Kaina USD',
             data: stockPrice,
             fill: false,
             backgroundColor: '#0071bd',
@@ -48,17 +49,14 @@ const LineChartStocks = ({stockHistory, currentPrice, stockSymbol}) => {
 
     return (
         <>
-            <Row className="chart-header">
-                <Typography level={2} className="chart-title">
-                    {stockSymbol} Price chart
+        <Container>
+            <Row>
+                <Typography level={5}>
+                    {stockSymbol} dabartinė kaina: $ {currentPrice}
                 </Typography>
-                <Col className="price-container">
-                    <Typography className="price-current" level={5}>
-                        Current {stockSymbol} Price: $ {currentPrice}
-                    </Typography>
-                </Col>
             </Row>
             <Line data={data} options={options} />
+         </Container>
         </>
     )
 }

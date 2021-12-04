@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import millify from 'millify';
-import { Typography, Row, Col, Statistic, Table, Space, Button } from 'antd';
-import {Container, Title, StocksWrap, StockLink} from '../Portfolio/PortfolioElements';
-import {Cryptos} from '../Cryptos';
-import {Stocks} from '../Stocks';
+import {Table, Row} from 'antd';
+import {Container, Title, Text, Greeting, Button, Column, AutoBtn} from './AutoElements';
 import Axios from "axios";
 
 export const Auto = () => {
@@ -48,7 +45,7 @@ export const Auto = () => {
             dataIndex: 'trinti',
             key: 'trinti',
             render: (text, record) => (
-                <span
+                <AutoBtn
                   onClick={(e) => { 
                       e.preventDefault();
                       const data = cryptoData.filter(cryptoData => cryptoData.key !== record.key);
@@ -56,8 +53,8 @@ export const Auto = () => {
                       setCryptoData(data);
                    }}
                 >
-                  Delete
-                </span>
+                  Trinti
+                </AutoBtn>
               ),
         }
     ];
@@ -98,7 +95,7 @@ export const Auto = () => {
             dataIndex: 'trinti',
             key: 'trinti',
             render: (text, record) => (
-                <span
+                <AutoBtn
                   onClick={(e) => { 
                       e.preventDefault();
                       const data = cryptoData.filter(cryptoData => cryptoData.key !== record.key);
@@ -106,8 +103,8 @@ export const Auto = () => {
                       setCryptoData(data);
                    }}
                 >
-                  Delete
-                </span>
+                  Trinti
+                </AutoBtn>
               ),
         }
     ];
@@ -191,11 +188,23 @@ export const Auto = () => {
    
     return (
         <>
+        <Container>
+        <Greeting>Automatizuoti pirkimo ir pardavimo sandoriai</Greeting>
+
+        <Row>
+            <Column>
+                <Text>Generuoti automatizuotų sandorių ataskaitą CSV formatu</Text>
+                <Button type="button" onClick={generateCSV}>Generuoti</Button>
+
+            </Column>
+        </ Row>
+
+        <Title>Virtualių valiutų automatizuoti sandoriai</Title>
             <Table dataSource={cryptoData} columns={columnsCrypto} pagination={true} />
+        <Title>Vertybinių popierių automatizuoti sandoriai</Title>
             <Table dataSource={stockData} columns={columnsStock} pagination={true} />
 
-            <button type="button" onClick={generateCSV}>Generuoti ataskaitą</button>
-
+        </Container>
         </>
     )
 }

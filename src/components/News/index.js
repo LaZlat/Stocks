@@ -1,9 +1,10 @@
 import React from 'react'
-import {Select, Typography, Row, Col,  Avatar, Card} from 'antd'
+import {Row, Col, Divider} from 'antd'
 import moment from 'moment';
 import { useGetNewsQuery } from '../../services/investNewsAPI';
 import Loader from '../Loader';
 import { useGetNewsVideoQuery } from '../../services/investNewsVideoAPI';
+import {Container, Greeting, NewsCard, Title, Text, Para, Ava, Image} from './NewsElements'
 
 export const News = ({simplified}) => {
     const {data: investNews, isFetching } = useGetNewsQuery({newsCategory: 'stocks', count: simplified ? 3 : 12});
@@ -14,56 +15,70 @@ export const News = ({simplified}) => {
 
     return (
         <>
+        <Container>
+        {!simplified && (
+        <>
+        <Greeting>Papildoma mokomoji medžiaga</Greeting>
+        </>
+        )}
+        <Title>Tekstinė medžiaga</Title>
         <Row gutter={[24, 24]}>
             {investNews.value.map((news, i) => (
                 <Col xs={24} sm={12} lg={8} key ={i}>
-                    <Card hoverable>
+                    <NewsCard hoverable>
                         <a href={news.url} target="_blank" rel="noreferrer">
                             <div>
-                                <Typography level={4}>
+                                <Text>
                                     {news.name}
-                                </Typography>
-                                <img src={news.image?.thumbnail?.contentUrl || demoUrl} alt="news"></img>
+                                </Text>
+                                <Divider />
+                                <Image src={news.image?.thumbnail?.contentUrl || demoUrl} alt="news"></Image>
                             </div>
-                            <p>
+                            <Para>
                                 {news.description > 100 ? `${news.description.substring(0,100)}...` : news.description}
-                            </p>
+                            </Para>
+                            <Divider />
                             <div>
                                 <div>
-                                    <Avatar src={news.provider[0]?.image?.thumbnail?.contentUrl || demoUrl} alt="provider" />
-                                    <Typography>{news.provider[0]?.name}</Typography>
+                                    <Ava src={news.provider[0]?.image?.thumbnail?.contentUrl || demoUrl} alt="provider" />
+                                    <Para>{news.provider[0]?.name}</Para>
                                 </div>
-                                <Typography>{moment(news.datePublished).startOf('ss').fromNow()}</Typography>
+                                <Para>{moment(news.datePublished).startOf('ss').fromNow()}</Para>
                             </div>
                         </a>
-                    </Card>
+                    </NewsCard>
                 </Col>
             ))}
         </Row>
+        <Title>Vaizdinė medžiaga</Title>
 
          <Row gutter={[24, 24]}>
             {investVideoNews?.value.map((news, i) => (
                 <Col xs={24} sm={12} lg={8} key ={i}>
-                    <Card hoverable>
+                    <NewsCard hoverable>
                         <a href={news.contentUrl} target="_blank" rel="noreferrer">
                             <div>
-                                <Typography level={4}>
+                                <Text level={4}>
                                     {news.name}
-                                </Typography>
-                                <img src={news.thumbnailUrl || demoUrl} alt="video"></img>
+                                </Text>
+                                <Divider />
+                                <Image src={news.thumbnailUrl || demoUrl} alt="video"></Image>
                             </div>
+                            <Divider />
+
                             <div>
                                 <div>
-                                    <Typography>{news.publisher[0]?.name}</Typography>
+                                    <Text>{news.publisher[0]?.name}</Text>
                                 </div>
-                                <Typography>{moment(news.datePublished).startOf('ss').fromNow()}</Typography>
+                                <Text>{moment(news.datePublished).startOf('ss').fromNow()}</Text>
                             </div>
                         </a>
-                    </Card>
+                    </NewsCard>
                 </Col>
             ))}
 
         </Row>
+        </Container>
         </>
     )
 };

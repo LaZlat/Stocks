@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-import HTMLReactParser from 'html-react-parser';
 import { useParams } from 'react-router-dom'
 import millify from 'millify';
 import {Col, Row, Typography, Select} from 'antd';
 import {useGetHistoryQuery, useGetStockQuery} from '../../services/financeAPI';
-import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
-import LineChartStocks from '../LineChartStocks';
+import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, ThunderboltOutlined } from '@ant-design/icons';
+import LineChartStocks from '../Charts/LineChartStocks';
 import Loader from '../Loader';
-import { FormContent, FormButton, FormH1, FormInput, FormLabel, Form} from './StockDetailsElements';
+import {DivNormal, FormContent, FormButton, FormH1, FormInput, FormLabel, Form, Container, Greeting, Title, Column, Text, Slct, Div, Divide} from './StockDetailsElements';
 import Axios from 'axios';
+
 
 export const StockDetails = () => {
     const { symbol } = useParams();
@@ -34,9 +34,9 @@ export const StockDetails = () => {
 
     const stats = [
         { title: 'Pilnas pavadinimas', value: stockDetails[0].longName, icon: <FundOutlined /> },
-        { title: 'Simbolis', value: stockDetails[0].symbol, icon: <FundOutlined /> },
-        { title: 'Price to USD', value: stockDetails[0].ask, icon: <DollarCircleOutlined /> },
-        { title: 'Per dieną parduodama', value: stockDetails[0].averageDailyVolume10Day, icon: <ThunderboltOutlined /> },
+        { title: 'Simbolis', value: stockDetails[0].symbol, icon: <StopOutlined /> },
+        { title: 'Kaina USD', value: stockDetails[0].ask, icon: <DollarCircleOutlined /> },
+        { title: 'Per dieną parduodama', value: millify(stockDetails[0].averageDailyVolume10Day), icon: <ThunderboltOutlined /> },
         { title: 'Birža kurioje prekiaujama', value: stockDetails[0].exchange, icon: <DollarCircleOutlined /> },
         { title: 'Biržos laiko zona', value: stockDetails[0].exchangeTimezoneName, icon: <TrophyOutlined /> },
     ];
@@ -51,9 +51,9 @@ export const StockDetails = () => {
         { title: '52 savaičių žemiausia kaina', value: stockDetails[0].fiftyTwoWeekLow, icon: <FundOutlined /> },
         { title: '52 savaičių žemiausios kainos pokytis', value: stockDetails[0].fiftyTwoWeekLowChange, icon: <FundOutlined /> },
         { title: '52 savaičių auksčiausios kainos pokytis procentais', value: stockDetails[0].fiftyTwoWeekLowChangePercent, icon: <FundOutlined /> },
-        { title: 'Market cap', value: stockDetails[0].marketCap, icon: <FundOutlined /> },
-        { title: 'Rinkos būsena', value: stockDetails[0].marketState, icon: <FundOutlined /> },
-        { title: 'Vertybinių popierių tipas', value: stockDetails[0].quoteType, icon: <FundOutlined /> },
+        { title: 'Vertė rinkoje', value: millify(stockDetails[0].marketCap), icon: <CheckOutlined /> },
+        { title: 'Rinkos būsena', value: stockDetails[0].marketState, icon: <ExclamationCircleOutlined /> },
+        { title: 'Vertybinių popierių tipas', value: stockDetails[0].quoteType, icon: <MoneyCollectOutlined /> },
     ];
 
     const buyStock = () => {
@@ -104,118 +104,115 @@ export const StockDetails = () => {
    
 
     return (
-        
-            <Col className="coin-detail-container">
-                <Col className="coin-heading-container">
-                    <Typography level={2} className="coin-name">
+        <Container>
+                    <Greeting>
                         {stockDetails[0].symbol}
-                    </Typography>
-                    <p>
-                        {stockDetails[0].name} live price in US dollars.
-                        View everything here and there
-                    </p>
-                </Col>
-                <Select defaultValue="1d" className="select-timeperiod" placeholder="Select interval1" onChange={(value) => setInterval(value)}>
-                    {time.map((date) => <Select key={date}>{date}</Select>)}
-                </Select>
-                {<LineChartStocks stockHistory={stockHistory} currentPrice={stockDetails[0].ask} stockSymbol={stockDetails[0].symbol}/>}
-                
-                <FormContent>
+                    </Greeting>
+                    <Div>
+                        <Title>{stockDetails[0].longName} vertė rinkoje</Title>
+                            <Row>
+                                {stats.map(({icon, title, value}) => (
+                                <Column xs={24} sm={12} lg={6}>
+                                    <Text>{icon}</Text>
+                                    <Text>{title}</Text>
+                                <Text>{value}</Text>
+                            </Column>
+                        ))}
+                        </Row>
+                    </Div>
+                    <Divide />
+                    
+                    <Row>
+                    <Column xs={24} sm={12} >
+                        <FormContent>
                           <Form>
-                              <FormH1>Pirkti</FormH1>
-                              <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormH1>Pirkti vertybinius popierius</FormH1>
+                              <FormLabel hmtlFor='for'>Perkamas kiekis</FormLabel>
                               <FormLabel hmtlFor='for'>{buyResponse}</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setBuyVolume(e.target.value)
                               }}/>
                               <FormButton type='button' onClick={buyStock}>Pirkti</FormButton>
                           </Form>
-                </FormContent>
-
-                <FormContent>
+                        </FormContent>
+                    </Column>
+                    <Column xs={24} sm={12} >
+                        <FormContent>
                           <Form>
-                              <FormH1>Parduoti</FormH1>
-                              <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormH1>Parduoti vertybinius popierius</FormH1>
+                              <FormLabel hmtlFor='for'>Parduodamas kiekis</FormLabel>
                               <FormLabel hmtlFor='for'>{sellResponse}</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setSellVolume(e.target.value)
                               }}/>
-                              <FormButton type='button' onClick={sellStock}>PArduoti</FormButton>
+                              <FormButton type='button' onClick={sellStock}>Parduoti</FormButton>
                           </Form>
-                </FormContent>
-                
-                <FormContent>
+                        </FormContent>
+                    </Column>
+                    <Column xs={24} sm={12} >
+                        <FormContent>
                           <Form>
-                              <FormH1>Auto pardavimas</FormH1>
+                              <FormH1>Kurti automatomatinį pardavimą</FormH1>
                               <FormLabel hmtlFor='for'>{autoSellResponse}</FormLabel>
-                              <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormLabel hmtlFor='for'>Parduodamas kiekis</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setAutoSellVolume(e.target.value)
                               }}/>
-                              <FormLabel hmtlFor='for'>Kaina</FormLabel>
+                              <FormLabel hmtlFor='for'>Bus parduodata pasiekus kainą</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setAutoSellPrice(e.target.value)
                               }}/>
-                              <FormButton type='button' onClick={autoSell}>Kurti pardavima</FormButton>
+                              <FormButton type='button' onClick={autoSell}>Kurti pardavimą</FormButton>
                           </Form>
-                </FormContent>
-
-                <FormContent>
+                        </FormContent>
+                    </Column>
+                    <Column xs={24} sm={12} >
+                        <FormContent>
                           <Form>
-                              <FormH1>Auto pirkimas</FormH1>
+                              <FormH1>Kurti automatomatinį pirkimą</FormH1>
                               <FormLabel hmtlFor='for'>{autoBuyResponse}</FormLabel>
-                              <FormLabel hmtlFor='for'>Kiekis</FormLabel>
+                              <FormLabel hmtlFor='for'>Perkamas kiekis</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setAutoBuyVolume(e.target.value)
                               }}/>
-                              <FormLabel hmtlFor='for'>Kaina</FormLabel>
+                              <FormLabel hmtlFor='for'>Bus nupirkta pasiekus kainą</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setAutoBuyPrice(e.target.value)
                               }}/>
-                              <FormButton type='button' onClick={autoBuy}>Kurti pirkima</FormButton>
+                              <FormButton type='button' onClick={autoBuy}>Kurti pirkimą</FormButton>
                           </Form>
-                </FormContent>
+                        </FormContent>
+                    </Column>
+                </Row>
+
+                <Divide />
+                <DivNormal>
+
+                <Column>
+                    <Text>
+                        {stockDetails[0].symbol} kainų pokyčio grafikas laiko intervalu:
+                    </Text>
+                </Column>
+                <Slct defaultValue="1d" className="select-timeperiod" placeholder="Select interval1" onChange={(value) => setInterval(value)}>
+                    {time.map((date) => <Select key={date}>{date}</Select>)}
+                </Slct>
+                {<LineChartStocks stockHistory={stockHistory} currentPrice={stockDetails[0].ask} stockSymbol={stockDetails[0].symbol}/>}
+                </DivNormal>
+
+                <Divide />
                 
-                <Col className="stats-container">
-                    <Col className="coin-value-stats">
-                        <Col className="coin-value=stats-heading">
-                            <Typography level={3} className="coin-details-heading">
-                                {stockDetails.longName} Value Statistics
-                            </Typography>
-                            <p>
-                                An Overview of stats and statistics of {stockDetails.longName}
-                            </p>
-                        </Col>
-                        {stats.map(({icon, title, value}) => (
-                            <Col className="coin-stats">
-                                <Col className="coin-stats-name">
-                                    <Typography>{icon}</Typography>
-                                    <Typography>{title}</Typography>
-                                </Col>
-                                <Typography className="stats">{value}</Typography>
-                            </Col>
-                        ))}
-                    </Col>
-                    <Col className="other-value-stats">
-                        <Col className="coin-value=stats-heading">
-                            <Typography level={3} className="coin-details-heading">
-                                {stockDetails.longName} Value Statistics
-                            </Typography>
-                            <p>
-                                An Overview of stats and statistics of {stockDetails.longName}
-                            </p>
-                        </Col>
-                        {genericStats.map(({icon, title, value}) => (
-                            <Col className="coin-stats">
-                                <Col className="coin-stats-name">
-                                    <Typography>{icon}</Typography>
-                                    <Typography>{title}</Typography>
-                                </Col>
-                                <Typography className="stats">{value}</Typography>
-                            </Col>
-                        ))}
-                    </Col>
-                </Col>
-            </Col>
+                <Div>
+                    <Title >{stockDetails.longName} apžvalga ir statistika</Title>
+                <Row>
+                    {genericStats.map(({icon, title, value}) => (
+                    <Column xs={24} sm={12} lg={6}>
+                            <Text>{icon}</Text>
+                            <Text>{title}</Text>
+                            <Text >{value}</Text>
+                    </Column>))}
+                </Row>
+                </Div>
+            </Container>
+
     )
 }

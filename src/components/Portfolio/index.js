@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import millify from 'millify';
-import { Typography, Row, Col, Statistic, Table, Space, Button } from 'antd';
-import {Container, Title, StocksWrap, StockLink} from '../Portfolio/PortfolioElements';
-import {Cryptos} from '../Cryptos';
-import {Stocks} from '../Stocks';
+import {Row, Table} from 'antd';
+import {Container, Title, Text, Greeting, PortLink, Button, Column} from '../Portfolio/PortfolioElements';
 import Axios from "axios";
 
 
@@ -34,7 +32,7 @@ export const Portfolio = () => {
             dataIndex: 'pirkti/parduoti',
             key: 'pirkti/parduoti',
             render: (text, record) => (
-                  <StockLink to={`/crypto/${record.nr}`}>Pirkti/Parduoti</StockLink>
+                  <PortLink to={`/crypto/${record.nr}`}>Pirkti/Parduoti</PortLink>
             ),
         }
     ];
@@ -54,9 +52,7 @@ export const Portfolio = () => {
             title: 'Pirkti/Parduoti',
             key: 'pirkti/parduoti',
             render: (record) => (
-                <Space size="middle">
-                  <a href={"/stock/" + record?.symbol}>Pirkti/Parduoti</a>
-                </Space>
+                  <PortLink to={"/stock/" + record?.symbol}>Pirkti/Parduoti</PortLink>
               ),
         }
     ];
@@ -133,16 +129,24 @@ export const Portfolio = () => {
     return (
         <>
         <Container>
-            <Title>Portfolio</Title>
+            <Greeting>Portfelis</Greeting>
             <Row>
-                <Col span={6}><Statistic title="Total cash" value={cashData?.data?.amount} suffix={cashData?.data?.currecny} /></Col>
+            <Column sm={24} lg={12} span={12}>
+                    <Text>Šiuo metu sąskaitoje yra disponuojamų lėšų suma: {millify(cashData?.data?.amount)} USD</Text>
+            </Column>
+            <Column sm={24} lg={12} span={12}>
+            <Text>Generuoti sąskaitos ataskaitą CSV formatu</Text>
+            <Button type="button" onClick={generateCSV}>Generuoti</Button>
+
+            </Column>
+
             </Row>
 
+            
+            <Title>Viso turima virtualių valiutų</Title>
             <Table dataSource={cryptoData} columns={columnsCrypto} pagination={false} />
+            <Title>Viso turima vertybinių popierių</Title>
             <Table dataSource={stockData} columns={columnsStock} pagination={false} />
-
-            <button type="button" onClick={generateCSV}>Generuoti ataskaitą</button>
-
 
         </Container>
         </>
