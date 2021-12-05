@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import { Typography, Row, Col, Statistic, Table, Space, Button } from 'antd';
+import { Table} from 'antd';
+import {Container, Greeting, AutoBtn} from './PanelElements';
+
 import Axios from "axios";
 
 export const Panel = () => {
@@ -8,17 +10,17 @@ export const Panel = () => {
 
     const columns = [
         {
-            title: 'Name',
+            title: 'Vardas',
             dataIndex: 'name',
             key: 'name',
         },
         {
-          title: 'Email',
+          title: 'Elektroninis paštas',
           dataIndex: 'email',
           key: 'email',
         },
         {
-            title: 'Cash',
+            title: 'Pinigai',
             dataIndex: 'cash',
             key: 'cash',
           },
@@ -27,7 +29,7 @@ export const Panel = () => {
             dataIndex: 'trinti',
             key: 'trinti',
             render: (text, record) => (
-                <span
+                <AutoBtn
                   onClick={(e) => { 
                       e.preventDefault();
                       const data = users.filter(users => users.key !== record.key);
@@ -35,8 +37,8 @@ export const Panel = () => {
                       setUsers(data);
                    }}
                 >
-                  Delete
-                </span>
+                  Trinti
+                </AutoBtn>
             ),
         },
         {
@@ -44,14 +46,14 @@ export const Panel = () => {
             dataIndex: 'restartuoti',
             key: 'restartuoti',
             render: (text, record) => (
-                <span
+                <AutoBtn
                   onClick={(e) => { 
                       e.preventDefault();
                       restartUser(record.email);
                    }}
                 >
-                  Delete
-                </span>
+                  Restartuoti
+                </AutoBtn>
             ),
         }
     ];
@@ -125,8 +127,11 @@ export const Panel = () => {
 
     return (
         <>
+        <Container>
+        <Greeting>Administratoriaus kontrolė</Greeting>
             <Table dataSource={users} columns={columns} pagination={true} />
-
+        
+        </Container>
         </>
     )
 }

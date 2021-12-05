@@ -13,6 +13,7 @@ export const Container = styled.div`
     overflow: hidden;
     background: #101522;
     padding: 50px;
+    width: 100%;
 `;
 
 export const StocksWrap = styled.div`

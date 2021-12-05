@@ -1,20 +1,16 @@
 import React from 'react';
 import millify from 'millify';
-import {Row, Col, Divider} from 'antd';
+import {Row, Col} from 'antd';
 import {Container, Title, StocksWrap, StockLink, Greeting, Text, Divide} from '../Main/MainElements';
-import {useGetCryptosQuery, useGetGlobalStatsQuery} from '../../services/cryptoAPI';
+import {useGetCryptosQuery} from '../../services/cryptoAPI';
 import {Cryptos} from '../Cryptos';
 import {Stocks} from '../Stocks';
 import {News} from '../News';
 import Loader from '../Loader';
 
-import { useHistory } from "react-router-dom";
-
 
 export const Homepage = () => {
     const {data, isFetching} = useGetCryptosQuery();
-    const{data: globalStatus} = useGetGlobalStatsQuery()
-    const history = useHistory();
 
     const globalStats = data?.data?.stats;
 
@@ -26,6 +22,11 @@ export const Homepage = () => {
         <>
         <Container>
             <Greeting>Sveiki, {localStorage.getItem("name")},</Greeting>
+            
+
+            <Divide />
+            <Title>Įvadas į  mokomąją sistemą Elektroniniai mainai</Title>
+
             <Divide />
             <Row>
                 <Col xs={24} sm={12} lg={6} span={12}>
@@ -34,15 +35,15 @@ export const Homepage = () => {
                 </Col>
                 <Col xs={24} sm={12} lg={6} span={12}>
                     <Title>Bendra rinkos vertybinių popierių vertė</Title>
-                    <Text>{millify(globalStats.totalMarketCap)} USD</Text>
+                    <Text>{millify(83530000000000)} USD</Text>
                 </Col>
                 <Col xs={24} sm={12} lg={6} span={12}>
-                    <Title>Paskutinių 24 valandų parduotų virtualių valiutų</Title>
+                    <Title>Paskutinių 24 valandų parduotų virtualių valiutų kiekis</Title>
                     <Text>{millify(globalStats.total24hVolume)}</Text>
                 </Col>
                 <Col xs={24} sm={12} lg={6} span={12}>
-                    <Title>Paskutinių 24 valandų parduotų vertybinių popierių</Title>
-                    <Text>{millify(globalStats.total24hVolume)}</Text>
+                    <Title>24 valandų parduotų NASDAQ vertybinių popierių kiekis</Title>
+                    <Text>{millify(6301122730)}</Text>
                 </Col>
             </Row>
 

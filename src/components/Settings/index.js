@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 import Axios from 'axios'
+import { Container, FormWrap, Form, FormH1, FormLabel, FormInput, FormButton, Title } from './SettingsElements'
+import {Col, Row} from 'antd'
 
 export const Settings = () => {
     const [email, setEmail] = useState("");
@@ -17,7 +19,6 @@ export const Settings = () => {
             email: localStorage.getItem("email"),
             password: password
         }).then((res) => {
-            if (res.status === 200){
                 if (password1 !== password2) {
                     setPasswordHead("Slaptažodžiai nesutampa");
                 } else {
@@ -25,14 +26,16 @@ export const Settings = () => {
                         email: localStorage.getItem("email"),
                         password: password1
                     }).then((response) => {
-                        if(res.status === 200) {
                             setPasswordHead("Slaptažodis pakeistas");
-                        } else {
+                        
+                    }).catch(err => {
+                        if(err.response.status === 404) {
                             setPasswordHead("Klaida, bandykite dar kartą");
                         }
                     })
                 }
-            } else {
+        }).catch(err => {
+            if(err.response.status === 404) {
                 setPasswordHead("Neteisingas slaptažodis")
             }
         })
@@ -46,10 +49,8 @@ export const Settings = () => {
                 oldEmail: localStorage.getItem("email"),
                 email: email
             }).then((res) => {
-                if (res.status === 200) {
                     console.log(res.data)
                     localStorage.setItem("email", res.data)
-                }
             })
         }
     }
@@ -59,15 +60,13 @@ export const Settings = () => {
             email: localStorage.getItem("email"),
             password: refresh
         }).then((res) => {
-            if (res.status === 200){
                 Axios.post('http://localhost:3001/sett/refresh', {
                 email: localStorage.getItem("email"),
             }).then((res) => {
-                if (res.status === 200) {
                     localStorage.setItem("email", email)
-                }
             })
-            } else {
+        }).catch(err => {
+            if(err.response.status === 404) {
                 setRefreshHead("Neteisingas slaptažodis")
             }
         })
@@ -76,50 +75,53 @@ export const Settings = () => {
 
     return (
         <>
-            <div>
-            <h1>AAA</h1>
-            <h1>AAA</h1>
+        <Container>
+        <Title> Nustatymai</Title>
+        <Row>
+        <Col sm={24} lg={8}>
+            <FormWrap>
 
-            <h1>AAA</h1>
-
-            <h1>AAA</h1>
-
-            <h1>AAA</h1>
-
-                <form>
-                    <h3>{emailHead}</h3>
-                    <label>Elektroninis paštas: {localStorage.getItem("email")}</label>
-                    <label>Naujas elktroninis paštas: {}</label>
-                    <input type='email' required onChange={(e) => {
-                                  setEmail(e.target.value)}}></input>
-                    <button onClick={changeEmail} type="button">Keisti el paštą</button>
-                </form>
-            </div>
-            <div>
-                <form>
-                    <h3>{passwordHead}</h3>
-                    <label>Esamas slaptažodis:</label>
-                    <input type='password' required onChange={(e) => {
-                                  setPassword(e.target.value)}}></input>
-                    <label>Naujas slaptažodis:</label>
-                    <input type='password' required onChange={(e) => {
-                                  setPassword1(e.target.value)}}></input>
-                    <label>Pakartoti slaptažodi:</label>
-                    <input type='password' required onChange={(e) => {
-                                  setPassword2(e.target.value)}}></input>              
-                    <button onClick={changePass} type="button">Keisti slaptažodį</button>
-                </form>
-            </div>
-            <div>
-                <form>
-                    <h3>{refreshHead}</h3>
-                    <p>Atstačius profilį dings visos jūsų virtualios valiutos ir vertybiniai popieriai. Paskyra taps šviežia su pradine pinigų suma</p>
-                    <label>Slaptažodis:</label>
-                    <input type='password' required onChange={(e) => {
-                                  setRefresh(e.target.value)}}></input>            
-                    <button onClick={refreshAcc} type="button">Atsatyti</button>
-                </form>
-            </div>
+                <Form>
+                    <FormH1>{emailHead}</FormH1>
+                    <FormLabel>Elektroninis paštas: {localStorage.getItem("email")}</FormLabel>
+                    <FormLabel>Naujas elektroninis paštas</FormLabel>
+                    <FormInput type='email' required onChange={(e) => {
+                                  setEmail(e.target.value)}}></FormInput>
+                    <FormButton onClick={changeEmail} type="button">Keisti el. paštą</FormButton>
+                </Form>
+            </FormWrap>
+            </Col>
+            <Col sm={24} lg={8}>
+            <FormWrap>
+                <Form>
+                    <FormH1>{passwordHead}</FormH1>
+                    <FormLabel>Esamas slaptažodis</FormLabel>
+                    <FormInput type='password' required onChange={(e) => {
+                                  setPassword(e.target.value)}}></FormInput>
+                    <FormLabel>Naujas slaptažodis</FormLabel>
+                    <FormInput type='password' required onChange={(e) => {
+                                  setPassword1(e.target.value)}}></FormInput>
+                    <FormLabel>Pakartoti slaptažodi</FormLabel>
+                    <FormInput type='password' required onChange={(e) => {
+                                  setPassword2(e.target.value)}}></FormInput>              
+                    <FormButton onClick={changePass} type="button">Keisti slaptažodį</FormButton>
+                </Form>
+            </FormWrap>
+            </Col>
+            <Col sm={24} lg={8}>
+            <FormWrap>
+                <Form>
+                    <FormH1>{refreshHead}</FormH1>
+                    <FormLabel>Atstačius profilį dings visos jūsų virtualios valiutos ir vertybiniai popieriai. Paskyra taps šviežia su pradine pinigų suma</FormLabel>
+                    <FormLabel>Slaptažodis:</FormLabel>
+                    <FormInput type='password' required onChange={(e) => {
+                                  setRefresh(e.target.value)}}></FormInput>            
+                    <FormButton onClick={refreshAcc} type="button">Atsatyti</FormButton>
+                </Form>
+            </FormWrap>
+            </Col>
+            </Row>
+        </Container>
         </>
         
     )

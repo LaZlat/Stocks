@@ -12,6 +12,7 @@ const NavbarMain = ({toggle}) => {
     }
 
     const [scrollNav, setScrollNav] = useState(false);
+    const [isAdmin, setAdmin] = useState(false);
 
     const changeNav = () => {
         if(window.scrollY >= 80) {
@@ -23,6 +24,10 @@ const NavbarMain = ({toggle}) => {
 
     useEffect(() => {
         window.addEventListener('scroll', changeNav)
+
+        if (localStorage.getItem("email") == "admin@admin.com") {
+            setAdmin(true);
+        }
     }, []);
 
     
@@ -56,6 +61,11 @@ const NavbarMain = ({toggle}) => {
                         <NavItem>
                             <NavLinks2 to='/settings'><KeyOutlined /> Nustatymai</NavLinks2>
                         </NavItem>
+                        {isAdmin && (
+                            <NavItem>
+                            <NavLinks2 to='/admin'><KeyOutlined /> Kontrolė</NavLinks2>
+                        </NavItem>
+                        )}
                     </NavMenu>
                     <NavBtn>
                         <NavBtnLink to='/'>Atsijungti</NavBtnLink>

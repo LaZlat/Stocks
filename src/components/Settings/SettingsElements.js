@@ -1,16 +1,16 @@
 import styled from "styled-components";
-import {Link} from 'react-router-dom';
+import { Typography} from 'antd';
 
 export const Container = styled.div`
     min-height: 692px;
-    position: relative;
     bottom: 0;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 0;
+    z-index: -1;
     overflow: hidden;
     background: #101522;
+    padding: 50px;
 `;
 
 export const FormWrap = styled.div`
@@ -24,35 +24,18 @@ export const FormWrap = styled.div`
     };
 `;
 
-export const Icon = styled(Link)`
-    margin-left: 32px;
-    margin-top: 32px;
-    margin-bottom: 32px;
-    text-decoration: none;
-    color: #01bf71;
-    font-weight: 700;
-    font-size: 32px;
-
-    @media screen and (max-width: 480px) {
-        margin-left: 16px;
-        margin-top: 8px
-    };
-
-    &:hover {
-        transition: all 0.2 ease-in-out;
-        color: #fff;
-    }
-`;
-
 export const FormContent = styled.div`
     height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-
+    border-color: #01bf71;
+    border-style: solid;
 
     @media screen and (max-width: 480px) {
         padding: 10px;
+        text-align: center;
+        margin-bottom: 3rem;
     };
 `;
 
@@ -72,6 +55,8 @@ export const Form = styled.form`
 
     @media screen and (max-width: 400px) {
         padding: 32px 32px;
+        text-align: center;
+        margin-bottom: 3rem;
     };
 `;
 
@@ -85,7 +70,7 @@ export const FormH1 = styled.h1`
 
 export const FormLabel = styled.label`
     margin-bottom: 8px;
-    font-size: 14px;
+    font-size: 1rem;
     color: #fff;
 `;
 
@@ -110,4 +95,13 @@ export const FormButton = styled.button`
         background: #fff;
         color: #01bf71;
     }
+`;
+
+export const Title = styled(Typography)`
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 3rem 0;
+    text-align: center;
+
+    margin-top: 50px 0 30px 0;
 `;
