@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Stocks } from '../components/Stocks'
 import Navbar from '../components/Navbar-Main';
+import Sidebar from '../components/Sidebar-Main';
 
 const StocksPage = () => {
 
@@ -12,6 +13,7 @@ const StocksPage = () => {
 
     return (
         <>
+        <Sidebar isOpen={isOpen} toggle={toggle} />
         <Navbar toggle={toggle} />
         <Stocks />
         </>

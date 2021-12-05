@@ -25,7 +25,7 @@ const NavbarMain = ({toggle}) => {
     useEffect(() => {
         window.addEventListener('scroll', changeNav)
 
-        if (localStorage.getItem("email") == "admin@admin.com") {
+        if (localStorage.getItem("email") == `${process.env.REACT_APP_ADMIN}`) {
             setAdmin(true);
         }
     }, []);
@@ -68,7 +68,7 @@ const NavbarMain = ({toggle}) => {
                         )}
                     </NavMenu>
                     <NavBtn>
-                        <NavBtnLink to='/'>Atsijungti</NavBtnLink>
+                        <NavBtnLink to='/' onClick={localStorage.setItem("token", "")}>Atsijungti</NavBtnLink>
                     </NavBtn>
                 </NavbarContainer>
             </Nav>

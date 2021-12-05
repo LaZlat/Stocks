@@ -1,12 +1,13 @@
 import React from 'react';
 import millify from 'millify';
 import {Row, Col} from 'antd';
-import {Container, Title, StocksWrap, StockLink, Greeting, Text, Divide} from '../Main/MainElements';
+import {CollaText, CollaTextDiv,Container, Title, StocksWrap, StockLink, Greeting, Text, Divide, Collas, CollaDiv, Image} from '../Main/MainElements';
 import {useGetCryptosQuery} from '../../services/cryptoAPI';
 import {Cryptos} from '../Cryptos';
 import {Stocks} from '../Stocks';
 import {News} from '../News';
 import Loader from '../Loader';
+import svg2 from '../../images/svg-2.svg';
 
 
 export const Homepage = () => {
@@ -24,10 +25,18 @@ export const Homepage = () => {
             <Greeting>Sveiki, {localStorage.getItem("name")},</Greeting>
             
 
-            <Divide />
-            <Title>Įvadas į  mokomąją sistemą Elektroniniai mainai</Title>
+            <CollaDiv>
+            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <CollaTextDiv>
+            <CollaText>Sveikiname prisijungus prie ELektroninių mainų sistemos!</CollaText>
+            <CollaText>Šiame pradiniame puslapyje galite matyti glaustą bendrinę informaciją vertybinių popierių ir virtualių valiutų rinkų informaciją. Visa informacija nuolatos atnaujinama!</CollaText>
+            <CollaText>Taip pat matote top 10 virtualių valiutų ir top 10 vertybinių popierių pagal jų populiarumą rinkose. Paspaudus ant bent kurio iš jų būsite perkeleras į detalų jų aprašą kur galėsite peržiūrėti išsamią infromacija bei pirkti, parduoti ar kurti atumatizuotus pirkimo ar pardavimo sandorius.</CollaText>
+            <CollaText>Be abejo puslapio apačioje rasite keleta, papildomos mokomosios medžiagos, nuroodų. Daugiau nurodų rasite per menių juostą atsidarę skiltį 'Mokomoji medžiaga'.</CollaText>
+            </CollaTextDiv>
+            </Collas>
+            </CollaDiv>
+            <Image src={svg2} alt="investing boy"></Image>
 
-            <Divide />
             <Row>
                 <Col xs={24} sm={12} lg={6} span={12}>
                     <Title>Bendra rinkos virtualių valiutų vertė</Title>

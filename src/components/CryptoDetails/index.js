@@ -8,7 +8,7 @@ import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCi
 import LineChart from '../Charts/LineChart';
 import Loader from '../Loader';
 import Axios from 'axios';
-import { MoreText, Link, DivNormal, FormContent, FormButton, FormH1, FormInput, FormLabel, Form, Container, Greeting, Title, Column, Text, Slct, Div, Divide} from './CryptoDetailsElements';
+import {CollaTextDiv, MoreText, TextColl, CollaDiv, Collas, Link, DivNormal, FormContent, FormButton, FormH1, FormInput, FormLabel, Form, Container, Greeting, Title, Column, Text, Slct, Div, Divide} from './CryptoDetailsElements';
 
 export const CryptoDetails = () => {
     const { id } = useParams();
@@ -51,11 +51,11 @@ export const CryptoDetails = () => {
     
     const buyCrypto = () => {
         Axios.post('http://localhost:3001/buy/buycrypto', {
-            uid: localStorage.getItem("email"),
             cid: id,
             price: cryptoDetails.price,
             volume: buyVolume,
-            name: cryptoDetails.name
+            name: cryptoDetails.name,
+            token: localStorage.getItem("token")
         }).then((response) => {
             setBuyResponse(response.data.msg)
         })
@@ -63,10 +63,10 @@ export const CryptoDetails = () => {
 
     const sellCrypto = () => {
         Axios.post('http://localhost:3001/sell/sellcrypto', {
-            uid: localStorage.getItem("email"),
             cid: id,
             price: cryptoDetails.price,
             volume: sellVolume,
+            token: localStorage.getItem("token")
         }).then((response) => {
             setSellResponse(response.data.msg)
         })
@@ -79,7 +79,8 @@ export const CryptoDetails = () => {
             price: autoSellPrice,
             volume: autoSellVolume,
             name: cryptoDetails.name,
-            sell: 1
+            sell: 1,
+            token: localStorage.getItem("token")
         }).then((response) => {
             setAutoSellResponse(response.data.msg)
         })
@@ -92,7 +93,8 @@ export const CryptoDetails = () => {
             price: autoBuyPrice,
             volume: autoBuyVolume,
             name: cryptoDetails.name,
-            sell: 0
+            sell: 0,
+            token: localStorage.getItem("token")
         }).then((response) => {
             setAutoBuyResponse(response.data.msg)
         })
@@ -103,6 +105,20 @@ export const CryptoDetails = () => {
                 <Greeting>
                         {cryptoDetails.name} ({cryptoDetails.slug})
                 </Greeting>
+                <CollaDiv>
+            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <CollaTextDiv>
+            <TextColl>Šiame detaliame virtualios valiutos puslapyje rasite detalią jos informaciją su pateikiama realiu metu rinkoje esančia kaina ir statistika.</TextColl>
+            <TextColl>Pasinaudojus viena iš keturių formų, atitinkamai galėsite:</TextColl>
+            <TextColl>Pirkti, jei pakanka jūsų tūrimų lėšų. Kitu atvėju būsite apie tai informuotas. Nupirktas valiutas galite peržiūrėti 'Portfelis'.</TextColl>
+            <TextColl>Parduoti, jei pakanka jūsų tūrimo kiekio. Kitu atvėju būsite apie tai informuotas. Turimas lėšas galite peržiūrėti 'Portfelis'</TextColl>
+            <TextColl>Kurti automatizuoda pirkima, jei pakanka jūsų tūrimų lėšų. Lėšos bus išskaičiuoajos iš sąskaitos. Kitu atvėju būsite apie tai informuotas. Sukurtas sutartis galite peržiūrėti tarp 'Automatizavimas'</TextColl>
+            <TextColl>Kurti automatizuoda pardavimą, jei pakanka jūsų tūrimo kiekio. Valiutos bus išskaičiuojamos iš sąskaitos. Kitu atvėju būsite apie tai informuotas 'Automatizavimas'</TextColl>
+            <TextColl>Sistema taip pat pateikia detalų kainų pokyčio grafiką, jog galėtumete įvertinti kaip kinta kaina. Laiko rėžį galite rinktis nuo 3 valandų iki 5 metų,</TextColl>
+
+            </CollaTextDiv>
+            </Collas>
+            </CollaDiv>
                 <Div>
                             <Title>
                                 {cryptoDetails.name} vertė rinkoje

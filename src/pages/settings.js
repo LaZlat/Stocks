@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Settings } from '../components/Settings'
 import Navbar from '../components/Navbar-Main';
+import Sidebar from '../components/Sidebar-Main';
 
 const SettingsPage = () => {
 
@@ -12,6 +13,7 @@ const SettingsPage = () => {
 
     return (
         <>
+        <Sidebar isOpen={isOpen} toggle={toggle} />
         <Navbar toggle={toggle} />
         <Settings />
         </>

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import millify from 'millify';
 import { Row, Col} from 'antd';
-import { CryptoContainer, CryptoCard, CryptoLink, Image, SearchCrypto, CryptoInput, Container, Title, Greeting} from './CryptosElements';
+import { CollaTextDiv, CryptoContainer, CryptoCard, CryptoLink, Image, SearchCrypto, CryptoInput, Container, Title, Greeting, CollaDiv, Collas, Text} from './CryptosElements';
 import Loader from '../Loader';
 import { useGetCryptosQuery } from '../../services/cryptoAPI';
 
@@ -25,10 +25,20 @@ export const Cryptos = ({simplified}) => {
         {!simplified && (
         <>
         <Greeting>Virtualios valiutos</Greeting>
+        <CollaDiv>
+            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <CollaTextDiv>
+            <Text>Šiame virtualių valiutų puslapyje galite matyti visas sistemoje esančias virtualias valiutas. Paspaudus ant bent kurio iš jų būsite perkeleras į detalų jų aprašą kur galėsite peržiūrėti išsamią infromacija bei pirkti, parduoti ar kurti atumatizuotus pirkimo ar pardavimo sandorius.</Text>
+            <Text>Į laukelį 'Rasti virtualias valiutas' įvedus pavadinimą, bus parodoma norima valiuta.</Text>
+            </CollaTextDiv>
+
+            </Collas>
+            </CollaDiv>
         <SearchCrypto>
         <Title>Rasti virtualias valiutas</Title>
             <CryptoInput placeholder="Virtualios valiutos" onChange={(e) => setSearchTerm(e.target.value)}/>
         </SearchCrypto>
+        
         </>
         )}
         <CryptoContainer>

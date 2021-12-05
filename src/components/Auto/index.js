@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Table, Row} from 'antd';
-import {Container, Title, Text, Greeting, Button, Column, AutoBtn} from './AutoElements';
+import {Container,CollaTextDiv, Title, Text, Greeting, Button, Column, AutoBtn, CollaDiv, Image, Collas} from './AutoElements';
 import Axios from "axios";
+import svg5 from '../../images/svg-5.svg';
 
 export const Auto = () => {
 
@@ -190,10 +191,22 @@ export const Auto = () => {
         <>
         <Container>
         <Greeting>Automatizuoti pirkimo ir pardavimo sandoriai</Greeting>
+        <CollaDiv>
+            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <CollaTextDiv>
+            <Text>Šiame automatizuotų pirkimo ir pardavimo sandorių puslapyje galite matyti informacja apie visus jūsų būvusius ir esamus sandorius.</Text>
+            <Text>Būsenos skiltyje nurodoma ar šis sandoris yra aktyvus t.y. gali būti įvykdytas ar jau yra pasibaigęs. Kiekvieną iš sandorių esant poreikiui galite ištrinti. Jei sandoris dar nėra įgyvendintas atgausite savo pinigus ar virtualias valiutas/ vertybinius popierius</Text>
+            <Text>Paspaudus mygtuką 'Generuoti' bus sukurtas CSV formatu ataskaitą kuria galėsite atsisiųsti.</Text>
+            <Text>Įvykus pardavimui ar pirkimui apie tai būsite informuotas jūsų elektroniniu paštu.</Text>
 
+            </CollaTextDiv>
+
+            </Collas>
+            </CollaDiv>
+            <Image src={svg5} alt="graph data"></Image>
         <Row>
             <Column>
-                <Text>Generuoti automatizuotų sandorių ataskaitą CSV formatu</Text>
+                <Title>Generuoti automatizuotų sandorių ataskaitą CSV formatu</Title>
                 <Button type="button" onClick={generateCSV}>Generuoti</Button>
 
             </Column>

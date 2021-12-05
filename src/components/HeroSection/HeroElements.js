@@ -3,7 +3,7 @@ import { MdArrowForward, MdKeyboardArrowRight } from 'react-icons/md'
 
 
 export const HeroContainer = styled.div`
-    background: #0C0C0C;
+    background: #101522;
     display: flex;
     justify-content: center;
     align-items: center;

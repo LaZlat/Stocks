@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Auto } from '../components/Auto'
 import Navbar from '../components/Navbar-Main';
+import Sidebar from '../components/Sidebar-Main';
 
 const AutoPage = () => {
 
@@ -12,6 +13,7 @@ const AutoPage = () => {
 
     return (
         <>
+        <Sidebar isOpen={isOpen} toggle={toggle} />
         <Navbar toggle={toggle} />
         <Auto />
         </>

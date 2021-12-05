@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Loader from '../Loader';
 import { Row, Col} from 'antd';
-import { StockContainer, StockCard, StockLink, SearchStock, StockInput, Title, Greeting, Container} from './StocksElements';
+import { CollaTextDiv, StockContainer, StockCard, StockLink, SearchStock, StockInput, Title, Greeting, Container, CollaDiv, Collas, Text} from './StocksElements';
 import millify from 'millify';
 import { useGetMostActivesQuery } from '../../services/financeAPI';
 
@@ -25,6 +25,14 @@ export const Stocks = ({simplified}) => {
         {!simplified && (
         <>
         <Greeting>Vertybiniai popieriai</Greeting>
+        <CollaDiv>
+            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <CollaTextDiv>
+            <Text>Šiame vertybinių popierių puslapyje galite matyti visus sistemoje esančius vertybinius popierius. Paspaudus ant bent kurio iš jų būsite perkeleras į detalų jų aprašą kur galėsite peržiūrėti išsamią infromacija bei pirkti, parduoti ar kurti atumatizuotus pirkimo ar pardavimo sandorius.</Text>
+            <Text>Į laukelį 'Rasti verybinius popierius' įvedus pavadinimą, bus parodoma norimi vertybiniai popieriai.</Text>
+            </CollaTextDiv>
+            </Collas>
+            </CollaDiv>
         <SearchStock>
             <Title>Rasti vertybinius popierius</Title>
             <StockInput placeholder="Vertybiniai popieriai" onChange={(e) => setSearchTerm(e.target.value)}/>

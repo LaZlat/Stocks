@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import { useParams } from 'react-router-dom'
 import millify from 'millify';
-import {Col, Row, Typography, Select} from 'antd';
+import {Row} from 'antd';
 import {useGetHistoryQuery, useGetStockQuery} from '../../services/financeAPI';
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import LineChartStocks from '../Charts/LineChartStocks';
 import Loader from '../Loader';
-import {DivNormal, FormContent, FormButton, FormH1, FormInput, FormLabel, Form, Container, Greeting, Title, Column, Text, Slct, Div, Divide} from './StockDetailsElements';
+import {CollaTextDiv, CollaDiv, TextColl, Collas, DivNormal, FormContent, FormButton, FormH1, FormInput, FormLabel, Form, Container, Greeting, Title, Column, Text, Slct, Div, Divide} from './StockDetailsElements';
 import Axios from 'axios';
 
 
@@ -58,11 +58,11 @@ export const StockDetails = () => {
 
     const buyStock = () => {
         Axios.post('http://localhost:3001/buy/buystock', {
-            uid: localStorage.getItem("email"),
             symbol: symbol,
             price: stockDetails[0].ask,
             currency: 'USD',
-            volume: buyVolume
+            volume: buyVolume,
+            token: localStorage.getItem("token")
         }).then((response) => {
             setBuyResponse(response.data.msg)
         })
@@ -70,10 +70,10 @@ export const StockDetails = () => {
 
     const sellStock = () => {
         Axios.post('http://localhost:3001/sell/sellstock', {
-            uid: localStorage.getItem("email"),
             symbol: symbol,
             price: stockDetails[0].ask,
-            volume: sellVolume
+            volume: sellVolume,
+            token: localStorage.getItem("token")
         }).then((response) => {
             setSellResponse(response.data.msg)
         })
@@ -84,7 +84,8 @@ export const StockDetails = () => {
             symbol: symbol,
             price: autoSellPrice,
             volume: autoSellVolume,
-            sell: 1
+            sell: 1,
+            token: localStorage.getItem("token")
         }).then((response) => {
             setAutoSellResponse(response.data.msg)
         })
@@ -96,7 +97,8 @@ export const StockDetails = () => {
             symbol: symbol,
             price: autoBuyPrice,
             volume: autoBuyVolume,
-            sell: 0
+            sell: 0,
+            token: localStorage.getItem("token")
         }).then((response) => {
             setAutoBuyResponse(response.data.msg)
         })
@@ -108,6 +110,20 @@ export const StockDetails = () => {
                     <Greeting>
                         {stockDetails[0].symbol}
                     </Greeting>
+                    <CollaDiv>
+            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <CollaTextDiv>
+            <TextColl>Šiame detaliame vertybinių popierių puslapyje rasite detalią informaciją su pateikiama realiu metu rinkoje esančia kaina ir statistika.</TextColl>
+            <TextColl>Pasinaudojus viena iš keturių formų, atitinkamai galėsite:</TextColl>
+            <TextColl>Pirkti, jei pakanka jūsų tūrimų lėšų. Kitu atvėju būsite apie tai informuotas. Nupirktus vertybiniu popierius galite peržiūrėti 'Portfelis'.</TextColl>
+            <TextColl>Parduoti, jei pakanka jūsų tūrimo kiekio. Kitu atvėju būsite apie tai informuotas. Turimas lėšas galite peržiūrėti 'Portfelis'</TextColl>
+            <TextColl>Kurti automatizuoda pirkima, jei pakanka jūsų tūrimų lėšų. Lėšos bus išskaičiuoajos iš sąskaitos. Kitu atvėju būsite apie tai informuotas. Sukurtas sutartis galite peržiūrėti tarp 'Automatizavimas'</TextColl>
+            <TextColl>Kurti automatizuoda pardavimą, jei pakanka jūsų tūrimo kiekio. Vertybiniai popieriai bus išskaičiuojami iš sąskaitos. Kitu atvėju būsite apie tai informuotas 'Automatizavimas'</TextColl>
+            <TextColl>Sistema taip pat pateikia detalų kainų pokyčio grafiką, jog galėtumete įvertinti kaip kinta kaina. Laiko rėžį galite rinktis nuo 5 minučių iki 3 mėnesių.</TextColl>
+
+            </CollaTextDiv>
+            </Collas>
+            </CollaDiv>
                     <Div>
                         <Title>{stockDetails[0].longName} vertė rinkoje</Title>
                             <Row>
@@ -194,7 +210,7 @@ export const StockDetails = () => {
                     </Text>
                 </Column>
                 <Slct defaultValue="1d" className="select-timeperiod" placeholder="Select interval1" onChange={(value) => setInterval(value)}>
-                    {time.map((date) => <Select key={date}>{date}</Select>)}
+                    {time.map((date) => <Slct key={date}>{date}</Slct>)}
                 </Slct>
                 {<LineChartStocks stockHistory={stockHistory} currentPrice={stockDetails[0].ask} stockSymbol={stockDetails[0].symbol}/>}
                 </DivNormal>

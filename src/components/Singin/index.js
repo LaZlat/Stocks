@@ -25,7 +25,7 @@ export const Signin = () => {
                 history.push(`/main`);
             }
         }).catch(err => {
-            if(err.response.status === 404) {
+            if(err.response) {
                 setTitle("Netinkamas el. paštas arba slaptažodis");
             }
         })

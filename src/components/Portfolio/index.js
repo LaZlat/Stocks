@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import millify from 'millify';
 import {Row, Table} from 'antd';
-import {Container, Title, Text, Greeting, PortLink, Button, Column} from '../Portfolio/PortfolioElements';
+import {CollaTextDiv, Container, Title, Text, Greeting, PortLink, Button, Column, CollaDiv, Image, Collas} from '../Portfolio/PortfolioElements';
 import Axios from "axios";
+import svg1 from '../../images/svg-1.svg';
 
 
 export const Portfolio = () => {
@@ -61,7 +62,7 @@ export const Portfolio = () => {
         const email = localStorage.getItem("email");
         const token = localStorage.getItem("token");
 
-        Axios.get('http://localhost:3001/port/generatecsv', { params: { email: email, token: token }})
+        Axios.get('http://localhost:3001/port/generatecsv', { params: {token: token }})
         .then((response) => {
             let link = document.createElement('a')
             link.id = 'download-csv'
@@ -77,7 +78,7 @@ export const Portfolio = () => {
         const email = localStorage.getItem("email");
         const token = localStorage.getItem("token");
         
-        Axios.get("http://localhost:3001/port/availablecash", { params: { email: email, token: token }}).then((response) => {
+        Axios.get("http://localhost:3001/port/availablecash", { params: { token: token }}).then((response) => {
             if( response.status === 200) {
                 setCashData(response);
             }
@@ -87,7 +88,7 @@ export const Portfolio = () => {
             }
         })
 
-        Axios.get("http://localhost:3001/port/availablestock", { params: { email: email, token: token }}).then((response) => {
+        Axios.get("http://localhost:3001/port/availablestock", { params: { token: token }}).then((response) => {
             if( response.status === 200) {
                 const stockData = response.data.map( e => ({
                     key: e.symbol,
@@ -103,7 +104,7 @@ export const Portfolio = () => {
                 }
             })
 
-        Axios.get("http://localhost:3001/port/availablecrypto", { params: { email: email, token: token }}).then((response) => {
+        Axios.get("http://localhost:3001/port/availablecrypto", { params: { token: token }}).then((response) => {
                 if( response.status === 200) {
                     const cryptoData = response.data.map( e => ({
                         key: e.cid,
@@ -130,12 +131,22 @@ export const Portfolio = () => {
         <>
         <Container>
             <Greeting>Portfelis</Greeting>
+            <CollaDiv>
+            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <CollaTextDiv>
+            <Text>Šiame portfelio puslapyje galite matyti informacja apie lėšų kiekį ar kokias virtualias valiutas ar vertybinius popierius turite savo sąskaitoje.</Text>
+            <Text>Paspaudus prie kiekvienos iš virtualių valiutų ar vertybinio popierių esančios parinkties 'Pirkti/Parduoti' būsite nukreiptas į puslapį kuriame galėsite tai atlikti.</Text>
+            <Text>Paspaudus mygtuką 'Generuoti' bus sukurtas CSV formatu ataskait kuria galėsite atsisiųsti.</Text>
+            </CollaTextDiv>
+            </Collas>
+            </CollaDiv>
+            <Image src={svg1} alt="graph data"></Image>
             <Row>
             <Column sm={24} lg={12} span={12}>
-                    <Text>Šiuo metu sąskaitoje yra disponuojamų lėšų suma: {millify(cashData?.data?.amount)} USD</Text>
+                    <Title>Šiuo metu sąskaitoje yra disponuojamų lėšų suma: {millify(cashData?.data?.amount)} USD</Title>
             </Column>
             <Column sm={24} lg={12} span={12}>
-            <Text>Generuoti sąskaitos ataskaitą CSV formatu</Text>
+            <Title>Generuoti sąskaitos ataskaitą CSV formatu</Title>
             <Button type="button" onClick={generateCSV}>Generuoti</Button>
 
             </Column>

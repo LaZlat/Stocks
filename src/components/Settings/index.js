@@ -46,7 +46,7 @@ export const Settings = () => {
             setEmailHead('Netinkamas email formatas')
         } else {
             Axios.post('http://localhost:3001/sett/email', {
-                oldEmail: localStorage.getItem("email"),
+                oldEmail: localStorage.getItem("token"),
                 email: email
             }).then((res) => {
                     console.log(res.data)
@@ -57,7 +57,7 @@ export const Settings = () => {
 
     const refreshAcc = () => {
         Axios.post('http://localhost:3001/signin', {
-            email: localStorage.getItem("email"),
+            email: localStorage.getItem("token"),
             password: refresh
         }).then((res) => {
                 Axios.post('http://localhost:3001/sett/refresh', {
