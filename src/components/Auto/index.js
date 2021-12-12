@@ -12,17 +12,17 @@ export const Auto = () => {
 
     const columnsCrypto = [
         {
-            title: 'Nr',
+            title: 'Sandorio Id',
             dataIndex: 'nr',
             key: 'nr',
         },
         {
-          title: 'Name',
+          title: 'Vardas',
           dataIndex: 'name',
           key: 'name',
         },
         {
-            title: 'Quantity',
+            title: 'Kiekis',
             dataIndex: 'quantity',
             key: 'quantity',
         },
@@ -37,12 +37,12 @@ export const Auto = () => {
             key: 'pirkimasparvadimas',
         },
         {
-            title: 'Busena',
+            title: 'Būsena',
             dataIndex: 'busena',
             key: 'busena',
         },
         {
-            title: 'Trinti',
+            title: 'Atšaukimas',
             dataIndex: 'trinti',
             key: 'trinti',
             render: (text, record) => (
@@ -54,7 +54,7 @@ export const Auto = () => {
                       setCryptoData(data);
                    }}
                 >
-                  Trinti
+                  Atšaukti
                 </AutoBtn>
               ),
         }
@@ -62,17 +62,17 @@ export const Auto = () => {
 
     const columnsStock = [
         {
-            title: 'Nr',
+            title: 'Sandorio Id',
             dataIndex: 'nr',
             key: 'nr',
         },
         {
-          title: 'Name',
+          title: 'Vardas',
           dataIndex: 'name',
           key: 'name',
         },
         {
-            title: 'Quantity',
+            title: 'Kiekis',
             dataIndex: 'quantity',
             key: 'quantity',
         },
@@ -87,12 +87,12 @@ export const Auto = () => {
             key: 'pirkimasparvadimas',
         },
         {
-            title: 'Busena',
+            title: 'Būsena',
             dataIndex: 'busena',
             key: 'busena',
         },
         {
-            title: 'Trinti',
+            title: 'Atšaukimas',
             dataIndex: 'trinti',
             key: 'trinti',
             render: (text, record) => (
@@ -104,13 +104,13 @@ export const Auto = () => {
                       setCryptoData(data);
                    }}
                 >
-                  Trinti
+                  Atšaukti
                 </AutoBtn>
               ),
         }
     ];
 
-    const generateCSV = () => {
+    const generateCSV1 = () => {
         const email = localStorage.getItem("email");
         const token = localStorage.getItem("token");
 
@@ -122,7 +122,9 @@ export const Auto = () => {
             link.setAttribute('download', 'autos_' + email + '.csv');
             document.body.appendChild(link)
             document.querySelector('#download-csv').click()
+            link = null;
         })
+        window.location.reload(false);
     }
 
     const deleteAuto = (id) => {
@@ -207,7 +209,7 @@ export const Auto = () => {
         <Row>
             <Column>
                 <Title>Generuoti automatizuotų sandorių ataskaitą CSV formatu</Title>
-                <Button type="button" onClick={generateCSV}>Generuoti</Button>
+                <Button type="button" onClick={generateCSV1}>Generuoti</Button>
 
             </Column>
         </ Row>

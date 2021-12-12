@@ -19,12 +19,12 @@ export const Portfolio = () => {
             key: 'nr',
           },
         {
-          title: 'Name',
+          title: 'Vardas',
           dataIndex: 'name',
           key: 'name',
         },
         {
-            title: 'Quantity',
+            title: 'Kiekis',
             dataIndex: 'quantity',
             key: 'quantity',
         },
@@ -40,12 +40,12 @@ export const Portfolio = () => {
 
     const columnsStock = [
         {
-          title: 'Symbol',
+          title: 'Simbolis',
           dataIndex: 'symbol',
           key: 'symbol',
         },
         {
-            title: 'Quantity',
+            title: 'Kiekis',
             dataIndex: 'quantity',
             key: 'quantity',
         },
@@ -62,15 +62,18 @@ export const Portfolio = () => {
         const email = localStorage.getItem("email");
         const token = localStorage.getItem("token");
 
+        let link = document.createElement('a')
+
         Axios.get('http://localhost:3001/port/generatecsv', { params: {token: token }})
         .then((response) => {
-            let link = document.createElement('a')
             link.id = 'download-csv'
             link.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response.data));
             link.setAttribute('download', 'portfolio_' + email + '.csv');
             document.body.appendChild(link)
             document.querySelector('#download-csv').click()
+            link = null;
         })
+        window.location.reload(false);
     }
 
     

@@ -45,8 +45,8 @@ export const CryptoDetails = () => {
         { title: 'Keliose rinkose parduodamas', value: cryptoDetails.numberOfMarkets, icon: <FundOutlined /> },
         { title: 'Keliose birŽose parduodamas', value: cryptoDetails.numberOfExchanges, icon: <MoneyCollectOutlined /> },
         { title: 'Patvirtintas tiekimas', value: cryptoDetails.approvedSupply ? <CheckOutlined /> : <StopOutlined />, icon: <ExclamationCircleOutlined /> },
-        { title: 'Esamas patiekta', value: `$ ${millify(cryptoDetails.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
-        { title: 'Cirkuliuojatis kiekis', value: `$ ${millify(cryptoDetails.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
+        { title: 'Esamas patiektas kiekis', value: `$ ${millify(cryptoDetails.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
+        { title: 'Cirkuliuojantis kiekis', value: `$ ${millify(cryptoDetails.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
     ];
     
     const buyCrypto = () => {
@@ -141,7 +141,7 @@ export const CryptoDetails = () => {
                     <Column xs={24} sm={12} >
                         <FormContent>
                           <Form>
-                              <FormH1>Pirkti virtualia valiutą</FormH1>
+                              <FormH1>Pirkti virtualią valiutą</FormH1>
                               <FormLabel hmtlFor='for'>Perkamas kiekis</FormLabel>
                               <FormLabel hmtlFor='for'>{buyResponse}</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
@@ -173,7 +173,7 @@ export const CryptoDetails = () => {
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setAutoSellVolume(e.target.value)
                               }}/>
-                              <FormLabel hmtlFor='for'>Bus parduodata pasiekus kainą</FormLabel>
+                              <FormLabel hmtlFor='for'>Bus parduota pasiekus X kainą</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setAutoSellPrice(e.target.value)
                               }}/>

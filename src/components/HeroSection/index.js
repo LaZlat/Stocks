@@ -19,7 +19,7 @@ const HeroSection = () => {
             </HeroBg>
             <HeroContent>
                 <HeroH1>Elektroniniai Mainai</HeroH1>
-                <HeroP>Mokomoji vertybinių popierių ir virtualių valiutų mainų sistema</HeroP>
+                <HeroP>Mokomoji vertybinių popierių ir virtualių valiutų prekybos sistema</HeroP>
                 <HeroBtwnWrapper>
                     <Button to='signup' onMouseEnter={onHover} onMouseLeave={onHover} onClick={(e) => history.push('/signin')}
                     primary='true' dark='true'>

@@ -68,7 +68,7 @@ const NavbarMain = ({toggle}) => {
                         )}
                     </NavMenu>
                     <NavBtn>
-                        <NavBtnLink to='/' onClick={localStorage.setItem("token", "")}>Atsijungti</NavBtnLink>
+                        <NavBtnLink to='/'>Atsijungti</NavBtnLink>
                     </NavBtn>
                 </NavbarContainer>
             </Nav>

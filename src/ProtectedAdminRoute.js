@@ -14,7 +14,6 @@ export const ProtectedAdminRoute = ({
     useEffect(() => {
             const email = localStorage.getItem("email");
             const token = localStorage.getItem("token");
-            console.log("aaaa")
 
         Axios.get("http://localhost:3001/auth/admin", { params: { email: email, token: token }}).then((response) => {
             if( response.status == 200) {
