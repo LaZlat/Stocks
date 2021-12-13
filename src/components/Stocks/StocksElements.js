@@ -5,9 +5,10 @@ import Collapsible from 'react-collapsible';
 
 export const Collas = styled(Collapsible)`
     color: #01bf71 !important;
-    text-align: right;
+    text-align: center;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    margin-top: 1rem;
 
     &:hover {
         transition: all 0.2 ease-in-out !important;
@@ -16,8 +17,9 @@ export const Collas = styled(Collapsible)`
 `
 export const CollaDiv = styled.div`
     color: #fff !important;
-    text-align: right !important;
-    font-size: 1.2rem !important;
+    text-align: center !important;
+    font-size: 1.3rem !important;
+    margin-top: 1rem;
 `
 export const Text = styled(Typography)`
     color: #000;

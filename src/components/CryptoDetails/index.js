@@ -106,15 +106,15 @@ export const CryptoDetails = () => {
                         {cryptoDetails.name} ({cryptoDetails.slug})
                 </Greeting>
                 <CollaDiv>
-            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <Collas trigger="-> PRADĖK SPAUSDAMAS ČIA <-">
             <CollaTextDiv>
-            <TextColl>Šiame detaliame virtualios valiutos puslapyje rasite detalią jos informaciją su pateikiama realiu metu rinkoje esančia kaina ir statistika.</TextColl>
-            <TextColl>Pasinaudojus viena iš keturių formų, atitinkamai galėsite:</TextColl>
-            <TextColl>Pirkti, jei pakanka jūsų tūrimų lėšų. Kitu atvėju būsite apie tai informuotas. Nupirktas valiutas galite peržiūrėti 'Portfelis'.</TextColl>
-            <TextColl>Parduoti, jei pakanka jūsų tūrimo kiekio. Kitu atvėju būsite apie tai informuotas. Turimas lėšas galite peržiūrėti 'Portfelis'</TextColl>
-            <TextColl>Kurti automatizuoda pirkima, jei pakanka jūsų tūrimų lėšų. Lėšos bus išskaičiuoajos iš sąskaitos. Kitu atvėju būsite apie tai informuotas. Sukurtas sutartis galite peržiūrėti tarp 'Automatizavimas'</TextColl>
-            <TextColl>Kurti automatizuoda pardavimą, jei pakanka jūsų tūrimo kiekio. Valiutos bus išskaičiuojamos iš sąskaitos. Kitu atvėju būsite apie tai informuotas 'Automatizavimas'</TextColl>
-            <TextColl>Sistema taip pat pateikia detalų kainų pokyčio grafiką, jog galėtumete įvertinti kaip kinta kaina. Laiko rėžį galite rinktis nuo 3 valandų iki 5 metų,</TextColl>
+            <TextColl>Kas toliau?</TextColl>
+            <TextColl>1. Susipažink su virtualios valiutos verte rinkoje.</TextColl>
+            <TextColl>2. Peržvėlk grafiką ir virtualios valiutos kainų pokytį.</TextColl>
+            <TextColl>3. Esant poreikiui paskaityk detalesnę informacija apie virtualią valiutą.</TextColl>
+            <TextColl>4. Nusprendei pirkti? Įvesk į pirkimo formą norimą kiekį, valiuta bus nupirkta ir atsidurs tavo portfelyje kuris pasiekiamas iš navigacijos juostos.</TextColl>
+            <TextColl>5. Nusprendei parduoti? Įvesk į pardavimo formą norimą kiekį, valiuta bus parduota, o pinigai tavo portfelyje kuris pasiekiamas iš navigacijos juostos.</TextColl>
+            <TextColl>6. Kaina netenkina, bet manai, jog tuoj turėtu pasikeisti ir nenori pražiopsoti? Sukurk automatizuotą pardavimo ar pirkimo sandorį, nurodydamas perkamą/parduodamą kiekį ir kainą. Virtualiai valiutai pasiekus tokią kainą ji bus nupirkta/parduota ir atsidurs tavo portfelyje.</TextColl>
 
             </CollaTextDiv>
             </Collas>
@@ -128,7 +128,7 @@ export const CryptoDetails = () => {
                             
                             <Column xs={24} sm={12} lg={6} >
                                     <Text>{icon}</Text>
-                                    <Text>{title}*</Text>
+                                    <Text>{title}</Text>
                                 <Text>{value}</Text>
                             </Column>
                             
@@ -138,7 +138,7 @@ export const CryptoDetails = () => {
                 <Divide />
 
                 <Row>
-                    <Column xs={24} sm={12} >
+                    <Column xs={24} sm={12} md={12} lg={6}>
                         <FormContent>
                           <Form>
                               <FormH1>Pirkti virtualią valiutą</FormH1>
@@ -151,7 +151,7 @@ export const CryptoDetails = () => {
                           </Form>
                         </FormContent>
                     </Column>
-                    <Column xs={24} sm={12} >
+                    <Column xs={24} sm={12} md={12} lg={6}>
                         <FormContent>
                           <Form>
                               <FormH1>Parduoti virtualią valiutą</FormH1>
@@ -164,7 +164,7 @@ export const CryptoDetails = () => {
                           </Form>
                         </FormContent>
                     </Column>
-                    <Column xs={24} sm={12} >
+                    <Column xs={24} sm={12} md={12} lg={6}>
                         <FormContent>
                           <Form>
                               <FormH1>Kurti automatomatinį pardavimą</FormH1>
@@ -173,7 +173,7 @@ export const CryptoDetails = () => {
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setAutoSellVolume(e.target.value)
                               }}/>
-                              <FormLabel hmtlFor='for'>Bus parduota pasiekus X kainą</FormLabel>
+                              <FormLabel hmtlFor='for'>Bus parduota pasiekus kainą</FormLabel>
                               <FormInput type='number' min='1' required onChange={(e) => {
                                   setAutoSellPrice(e.target.value)
                               }}/>
@@ -181,7 +181,7 @@ export const CryptoDetails = () => {
                           </Form>
                         </FormContent>
                     </Column>
-                    <Column xs={24} sm={12} >
+                    <Column xs={24} sm={12} md={12} lg={6}>
                         <FormContent>
                           <Form>
                               <FormH1>Kurti automatomatinį pirkimą</FormH1>

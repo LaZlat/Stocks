@@ -194,13 +194,13 @@ export const Auto = () => {
         <Container>
         <Greeting>Automatizuoti pirkimo ir pardavimo sandoriai</Greeting>
         <CollaDiv>
-            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+        <Collas trigger="-> PRADĖK SPAUSDAMAS ČIA <-">
             <CollaTextDiv>
-            <Text>Šiame automatizuotų pirkimo ir pardavimo sandorių puslapyje galite matyti informacja apie visus jūsų būvusius ir esamus sandorius.</Text>
-            <Text>Būsenos skiltyje nurodoma ar šis sandoris yra aktyvus t.y. gali būti įvykdytas ar jau yra pasibaigęs. Kiekvieną iš sandorių esant poreikiui galite ištrinti. Jei sandoris dar nėra įgyvendintas atgausite savo pinigus ar virtualias valiutas/ vertybinius popierius</Text>
-            <Text>Paspaudus mygtuką 'Generuoti' bus sukurtas CSV formatu ataskaitą kuria galėsite atsisiųsti.</Text>
-            <Text>Įvykus pardavimui ar pirkimui apie tai būsite informuotas jūsų elektroniniu paštu.</Text>
-
+            <Text>Kas toliau?</Text>
+            <Text>1. Čia rodomi visi tavo sukurti automatizuoti sandoriai.</Text>
+            <Text>2. Nesūk galvos, jie bus įgyvendinti automatiškai, vos pasieks norimą kainą!</Text>
+            <Text>3. Jei vis dėo to nusprendei panaikinti. Paspausk mygtuką 'Atšaukti' ir jei sandoris dar aktyvus, visos rezervuotos lėšos tau sugrįš.</Text>
+            <Text>4. Spasudamas mygtuką 'Generuoti' susigeneruosi ataskaitą apie savo tūtimus turtus, kuria galėsi dalintis.</Text>
             </CollaTextDiv>
 
             </Collas>

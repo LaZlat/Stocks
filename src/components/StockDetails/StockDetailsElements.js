@@ -4,10 +4,10 @@ import Collapsible from 'react-collapsible';
 
 export const Collas = styled(Collapsible)`
     color: #01bf71 !important;
-    text-align: right;
+    text-align: center;
     cursor: pointer;
-    font-size: 1.2rem;
-
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
     &:hover {
         transition: all 0.2 ease-in-out !important;
         color: #fff !important;
@@ -15,8 +15,9 @@ export const Collas = styled(Collapsible)`
 `
 export const CollaDiv = styled.div`
     color: #fff !important;
-    text-align: right !important;
-    font-size: 1.2rem !important;
+    text-align: center !important;
+    font-size: 1.3rem !important;
+    margin-bottom: 1rem;;
 `
 export const CollaTextDiv = styled.div`
     color: #000 !important;
@@ -65,7 +66,7 @@ export const Greeting = styled(Typography)`
 
 export const Text = styled(Typography)`
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 1rem 0 1rem 0;
 `
 
@@ -129,7 +130,7 @@ export const FormH1 = styled.h1`
 
 export const Form = styled.form`
     background: #000;
-    max-width: 400px;
+    max-width: 300px;
     height: auto;
     padding: 50px 30px 20px;
     width: 100%;
@@ -148,7 +149,7 @@ export const Form = styled.form`
 
 export const FormLabel = styled.label`
     margin-bottom: 8px;
-    font-size: 14px;
+    font-size: 18px;
     color: #fff;
 `;
 

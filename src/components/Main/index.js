@@ -23,15 +23,18 @@ export const Homepage = () => {
         <>
         <Container>
             <Greeting>Sveiki, {localStorage.getItem("name")},</Greeting>
-            
+
 
             <CollaDiv>
-            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <Collas trigger="-> PRADĖK SPAUSDAMAS ČIA <-">
             <CollaTextDiv>
-            <CollaText>Sveikiname prisijungus prie ELektroninių mainų sistemos!</CollaText>
-            <CollaText>Šiame pradiniame puslapyje galite matyti glaustą bendrinę informaciją vertybinių popierių ir virtualių valiutų rinkų informaciją. Visa informacija nuolatos atnaujinama!</CollaText>
-            <CollaText>Taip pat matote top 10 virtualių valiutų ir top 10 vertybinių popierių pagal jų populiarumą rinkose. Paspaudus ant bent kurio iš jų būsite perkeleras į detalų jų aprašą kur galėsite peržiūrėti išsamią infromacija bei pirkti, parduoti ar kurti atumatizuotus pirkimo ar pardavimo sandorius.</CollaText>
-            <CollaText>Be abejo puslapio apačioje rasite keleta, papildomos mokomosios medžiagos, nuroodų. Daugiau nurodų rasite per menių juostą atsidarę skiltį 'Mokomoji medžiaga'.</CollaText>
+            <CollaText>Sveikiname prisijungus prie Elektroninių mainų sistemos!</CollaText>
+            <CollaText>Kaip pradėti?</CollaText>
+            <CollaText>1. Nuspręsk ar nori investuoti į vertybinius popierius ar į virtualias valiutas.</CollaText>
+            <CollaText>2. Paspausk ant norimos kortelės kuri perkels į detalų jos aprašą kur galėsi pirkti ar parduoti!</CollaText>
+            <CollaText>3. Trūksta pasirinkimų? Iš navigacijos menių pasirink 'Vertybiniai popieriai' ar 'Virtualios valiutos' ir atrask daugiau pasirinkimų.</CollaText>
+            <CollaText>4. Vis dar neišsirenki? Pasirink vieną naujienų kortelių susipažinti su rinkos naujiemos ar peržiūrėk papildomą video medžiagą. Daugiau medžiagos gali rasit iš navgacijos jusotos pasirikinkus 'Mokomoji medžiaga'.</CollaText>
+
             </CollaTextDiv>
             </Collas>
             </CollaDiv>

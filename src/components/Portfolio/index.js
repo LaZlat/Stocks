@@ -135,11 +135,13 @@ export const Portfolio = () => {
         <Container>
             <Greeting>Portfelis</Greeting>
             <CollaDiv>
-            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <Collas trigger="-> PRADĖK SPAUSDAMAS ČIA <-">
             <CollaTextDiv>
-            <Text>Šiame portfelio puslapyje galite matyti informacja apie lėšų kiekį ar kokias virtualias valiutas ar vertybinius popierius turite savo sąskaitoje.</Text>
-            <Text>Paspaudus prie kiekvienos iš virtualių valiutų ar vertybinio popierių esančios parinkties 'Pirkti/Parduoti' būsite nukreiptas į puslapį kuriame galėsite tai atlikti.</Text>
-            <Text>Paspaudus mygtuką 'Generuoti' bus sukurtas CSV formatu ataskait kuria galėsite atsisiųsti.</Text>
+            <Text>Kas toliau?</Text>
+            <Text>1. Čia rodomi visi tavo turtai.</Text>
+            <Text>2. Pradinė pinigų suma, tau buvo suteikta vos susikūrus savo paskyrą!</Text>
+            <Text>3. Lentelėse matai visas savo tūrimas virtualias valiutas ir jų kiekį. Nusprendei kuria jų parduoti ar nusipirkti daugiau? Tiesiog paspausk mytuką 'Pirkti/parduoti' šalia keikvienos iš jų,</Text>
+            <Text>4. Spasudamas mygtuką 'Generuoti' susigeneruosi ataskaitą apie savo tūtimus turtus, kuria galėsi dalintis.</Text>
             </CollaTextDiv>
             </Collas>
             </CollaDiv>

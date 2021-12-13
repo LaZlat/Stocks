@@ -26,10 +26,11 @@ export const Stocks = ({simplified}) => {
         <>
         <Greeting>Vertybiniai popieriai</Greeting>
         <CollaDiv>
-            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+        <Collas trigger="-> PRADĖK SPAUSDAMAS ČIA <-">
             <CollaTextDiv>
-            <Text>Šiame vertybinių popierių puslapyje galite matyti visus sistemoje esančius vertybinius popierius. Paspaudus ant bent kurio iš jų būsite perkeleras į detalų jų aprašą kur galėsite peržiūrėti išsamią infromacija bei pirkti, parduoti ar kurti atumatizuotus pirkimo ar pardavimo sandorius.</Text>
-            <Text>Į laukelį 'Rasti verybinius popierius' įvedus pavadinimą, bus parodoma norimi vertybiniai popieriai.</Text>
+            <Text>Kas toliau?</Text>
+            <Text>1. Pasirink norimus vertybinius popierius ir spausk ant jų. Būsi perkeltas į langą kuriame galėsi juos pirkti ar parduoti.</Text>
+            <Text>2. Nerandi norimų? Į laukelį 'Rasti virtualias valiutas' įvedus pavadinimą, bus filtruojama norima valiutas</Text>
             </CollaTextDiv>
             </Collas>
             </CollaDiv>

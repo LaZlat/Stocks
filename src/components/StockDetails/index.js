@@ -111,15 +111,15 @@ export const StockDetails = () => {
                         {stockDetails[0].symbol}
                     </Greeting>
                     <CollaDiv>
-            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+                    <Collas trigger="-> PRADĖK SPAUSDAMAS ČIA <-">
             <CollaTextDiv>
-            <TextColl>Šiame detaliame vertybinių popierių puslapyje rasite detalią informaciją su pateikiama realiu metu rinkoje esančia kaina ir statistika.</TextColl>
-            <TextColl>Pasinaudojus viena iš keturių formų, atitinkamai galėsite:</TextColl>
-            <TextColl>Pirkti, jei pakanka jūsų tūrimų lėšų. Kitu atvėju būsite apie tai informuotas. Nupirktus vertybiniu popierius galite peržiūrėti 'Portfelis'.</TextColl>
-            <TextColl>Parduoti, jei pakanka jūsų tūrimo kiekio. Kitu atvėju būsite apie tai informuotas. Turimas lėšas galite peržiūrėti 'Portfelis'</TextColl>
-            <TextColl>Kurti automatizuoda pirkima, jei pakanka jūsų tūrimų lėšų. Lėšos bus išskaičiuoajos iš sąskaitos. Kitu atvėju būsite apie tai informuotas. Sukurtas sutartis galite peržiūrėti tarp 'Automatizavimas'</TextColl>
-            <TextColl>Kurti automatizuoda pardavimą, jei pakanka jūsų tūrimo kiekio. Vertybiniai popieriai bus išskaičiuojami iš sąskaitos. Kitu atvėju būsite apie tai informuotas 'Automatizavimas'</TextColl>
-            <TextColl>Sistema taip pat pateikia detalų kainų pokyčio grafiką, jog galėtumete įvertinti kaip kinta kaina. Laiko rėžį galite rinktis nuo 5 minučių iki 3 mėnesių.</TextColl>
+            <TextColl>Kas toliau?</TextColl>
+            <TextColl>1. Susipažink su vertybinių popierių verte rinkoje.</TextColl>
+            <TextColl>2. Peržvėlk grafiką ir vertybinių popierių  kainų pokytį.</TextColl>
+            <TextColl>3. Esant poreikiui paskaityk detalesnę informacija apie vertybinius popierius.</TextColl>
+            <TextColl>4. Nusprendei pirkti? Įvesk į pirkimo formą norimą kiekį, popieriai bus nupirkti ir atsidurs tavo portfelyje kuris pasiekiamas iš navigacijos juostos.</TextColl>
+            <TextColl>5. Nusprendei parduoti? Įvesk į pardavimo formą norimą kiekį, popieriai bus parduoti, o pinigai tavo portfelyje kuris pasiekiamas iš navigacijos juostos.</TextColl>
+            <TextColl>6. Kaina netenkina, bet manai, jog tuoj turėtu pasikeisti ir nenori pražiopsoti? Sukurk automatizuotą pardavimo ar pirkimo sandorį, nurodydamas perkamą/parduodamą kiekį ir kainą. Vertybiniams popieriams pasiekus tokią kainą ji bus nupirkta/parduota ir atsidurs tavo portfelyje.</TextColl>
 
             </CollaTextDiv>
             </Collas>
@@ -139,7 +139,7 @@ export const StockDetails = () => {
                     <Divide />
                     
                     <Row>
-                    <Column xs={24} sm={12} >
+                    <Column xs={24} sm={12} md={12} lg={6}>
                         <FormContent>
                           <Form>
                               <FormH1>Pirkti vertybinius popierius</FormH1>
@@ -152,7 +152,7 @@ export const StockDetails = () => {
                           </Form>
                         </FormContent>
                     </Column>
-                    <Column xs={24} sm={12} >
+                    <Column xs={24} sm={12} md={12} lg={6}>
                         <FormContent>
                           <Form>
                               <FormH1>Parduoti vertybinius popierius</FormH1>
@@ -165,7 +165,7 @@ export const StockDetails = () => {
                           </Form>
                         </FormContent>
                     </Column>
-                    <Column xs={24} sm={12} >
+                    <Column xs={24} sm={12} md={12} lg={6}>
                         <FormContent>
                           <Form>
                               <FormH1>Kurti automatomatinį pardavimą</FormH1>
@@ -182,7 +182,7 @@ export const StockDetails = () => {
                           </Form>
                         </FormContent>
                     </Column>
-                    <Column xs={24} sm={12} >
+                    <Column xs={24} sm={12} md={12} lg={6}>
                         <FormContent>
                           <Form>
                               <FormH1>Kurti automatomatinį pirkimą</FormH1>

@@ -26,10 +26,11 @@ export const Cryptos = ({simplified}) => {
         <>
         <Greeting>Virtualios valiutos</Greeting>
         <CollaDiv>
-            <Collas trigger="Paspausk mane dėl papildomos informacijos">
+            <Collas trigger="-> PRADĖK SPAUSDAMAS ČIA <-">
             <CollaTextDiv>
-            <Text>Šiame virtualių valiutų puslapyje galite matyti visas sistemoje esančias virtualias valiutas. Paspaudus ant bent kurio iš jų būsite perkeleras į detalų jų aprašą kur galėsite peržiūrėti išsamią infromacija bei pirkti, parduoti ar kurti atumatizuotus pirkimo ar pardavimo sandorius.</Text>
-            <Text>Į laukelį 'Rasti virtualias valiutas' įvedus pavadinimą, bus parodoma norima valiuta.</Text>
+            <Text>Kas toliau?</Text>
+            <Text>1. Pasirink norimą virtualią valiutą ir spausk ant jos. Būsi perkeltas į langą kuriame galėsi ją pirkti ar parduoti.</Text>
+            <Text>2. Nerandi norimos? Į laukelį 'Rasti virtualias valiutas' įvedus pavadinimą, bus filtruojama norima valiutas</Text>
             </CollaTextDiv>
 
             </Collas>
